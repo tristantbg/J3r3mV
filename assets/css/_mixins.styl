@@ -19,6 +19,19 @@ webfont(family, file, hack-chrome-windows = false, weight = 'normal')
 				font-family family
 				src url(font-url(file + '.svg#'+ family)) format('svg')
 
+hideselect()
+	-webkit-backface-visibility hidden
+	backface-visibility hidden
+	-webkit-user-select none
+	-moz-user-select none
+	-ms-user-select none
+	user-select none
+	-webkit-transform-style flat
+	transform-style flat
+	-webkit-tap-highlight-color transparent
+	-webkit-user-drag none
+	outline 0
+
  
  // First paragraph is flush, all paragraphs after are indented
  // Example: .paragraph 
@@ -47,28 +60,23 @@ font-smoothing()
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
+boxsizing()
+	*, *:after, *:before
+		-webkit-box-sizing border-box
+		-moz-box-sizing border-box
+		-ms-box-sizing border-box
+		-o-box-sizing border-box
+		box-sizing border-box
+
 
 // Vertical and horizontal centering, use sparingly as it degrade type integrity
 // Example: .element
 // 				dead-center(fixed)
 
-hideselect()
-	-webkit-backface-visibility hidden
-	backface-visibility hidden
-	-webkit-user-select none
-	-moz-user-select none
-	-ms-user-select none
-	user-select none
-	-webkit-transform-style flat
-	transform-style flat
-	-webkit-tap-highlight-color transparent
-	-webkit-user-drag none
-	outline 0
-
 dead-center(position)
 	position: position
-	top: 50%
-	left: 50%
+	top 50%
+	left 50%
 	transform: translate(-50%,-50%)
 
 flexbox()
@@ -78,27 +86,35 @@ flexbox()
 	display -webkit-flex
 	display flex
 
-vendor(prop, args)
-	-webkit-{prop} args
-	-moz-{prop} args
-	-ms-{prop} args
-	-o-{prop} args
-	{prop} args
-
 border-radius(args)
-	vendor(border-radius,args)
+	-webkit-border-radius args
+	-moz-border-radius args
+	-ms-border-radius args
+	-o-border-radius args
+	border-radius args
 
 box-shadow(args)
-	vendor(box-shadow,args)
+	-webkit-box-shadow args
+	-moz-box-shadow args
+	-ms-box-shadow args
+	-o-box-shadow args
+	box-shadow args
 	
 transition(what = all,time = 300ms,easing = ease)
-	vendor(transition,what time easing)
+	-webkit-transition what time easing
+	-moz-transition what time easing
+	-ms-transition what time easing
+	-o-transition what time easing
+	transition what time easing
 	
-transform(args)
-	vendor(transform,args)
-
-filter(args)
-	vendor(filter,args)
+transform(arg)
+	-webkit-transform arg
+	-moz-transform arg
+	-ms-transform arg
+	-o-transform arg
+	transform arg
 
 box-sizing()
-	vendor(box-sizing,border-box)
+	-moz-box-sizing border-box
+	-webkit-box-sizing border-box
+	box-sizing border-box
