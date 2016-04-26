@@ -1,1 +1,17 @@
-Title: Site Title
+Title: Charles Negre
+
+----
+
+Description: 
+
+----
+
+Keywords: 
+
+----
+
+Customcss: 
+
+----
+
+Googleanalytics: 

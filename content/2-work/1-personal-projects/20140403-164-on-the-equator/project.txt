@@ -1,0 +1,30 @@
+Title: 164° on the Equator
+
+----
+
+Date: 2014-04-03
+
+----
+
+Featuredimage: 
+
+----
+
+Medias: 
+
+- 
+  contentone: 101.jpg
+  contenttwo: 43.jpg
+  caption: ""
+- 
+  contentone: 4.jpg
+  contenttwo: ""
+  caption: ""
+
+----
+
+Showdate: 1
+
+----
+
+Pattern: one

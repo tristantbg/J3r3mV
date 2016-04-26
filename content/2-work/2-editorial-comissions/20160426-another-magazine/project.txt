@@ -1,0 +1,21 @@
+Title: Another Magazine
+
+----
+
+Date: 
+
+----
+
+Featuredimage: 
+
+----
+
+Medias: 
+
+----
+
+Showdate: 0
+
+----
+
+Pattern: two

@@ -29,4 +29,6 @@
 	<?php endif ?>
 
 </head>
-<body>
+<body <?php e(page()->isHomePage() == false, ' class="page"') ?> >
+
+<?php snippet('menu') ?>

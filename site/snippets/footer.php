@@ -1,3 +1,8 @@
+<?php $infos = $pages->find('infos'); ?>
+
+<div class="infos"><a title="<?php echo $infos->title()->html() ?>" href="<?php echo $infos->url() ?>"><?php echo $infos->title()->html() ?></a></div>
+<div class="back"><a href="<?php echo $site->homePage()->url() ?>" data-title="<?php echo $site->homePage()->uri() ?>">Back</a></div>
+
 <?php if(!$site->googleanalytics()->empty()): ?>
   <!-- Google Analytics-->
   <script>

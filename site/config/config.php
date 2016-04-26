@@ -16,6 +16,7 @@ for more information: http://getkirby.com/license
 */
 
 c::set('license', 'put your license key here');
+c::set('home', 'index');
 
 /*
 
@@ -31,5 +32,14 @@ of the system, please check out http://getkirby.com/docs/advanced/options
 
 c::set('oembed.lazyvideo', true);
 c::set('autopublish.templates', array('project', 'item'));
+c::set('thumb.quality', 100);
 c::set('sitemap.exclude', array('error'));
 c::set('sitemap.important', array('contact'));
+c::set('routes', array(
+    array(
+        'pattern' => '(:all)/ajax',
+        'action'  => function($uri) {
+          tpl::load(kirby()->roots()->templates() . DS . 'ajax.php', array('uri' => $uri), false );
+        }
+    )
+));

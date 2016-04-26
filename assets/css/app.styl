@@ -1,13 +1,13 @@
 @import 'nib'
 @import '../../node_modules/jeet/stylus/jeet'
 @import '_mixins.styl'
-@import './flickity.min.css'
+@import './vendor/flickity.min.css'
 
 $desktop = 1100px
 $padding = 10px
 
 $primary ?= white
-$secondary ?= #e9e0dcff
+$secondary ?= #fff
 
 // CSS Reset
 global-reset()
@@ -44,7 +44,7 @@ a, a:hover, a:visited, a:focus
 	text-decoration none
 	cursor pointer
 
-header.navbar-header
+header.main_menu
 	padding $padding
 	position fixed
 	width 100%
@@ -53,29 +53,21 @@ header.navbar-header
 	mix-blend-mode difference
 	color #fff
 	z-index 1000
-	transition(transform,500ms)
-
-header.navbar-header.hidden
-	transform(translate3D(0,-100%,0))
-    
-.k-nav-root
-	//flexbox()
-
-.k-nav-root .k-nav-list
-	display block!important
-
-.k-nav-root > li
-	span(1/2)
-	+below($desktop)
-		stack()
-
-.k-nav-root > li > .k-nav-list
-	margin-left 1.5em
-
+	transition(transform,800ms)
+	ul.category
+		span(1/2)
+		+below($desktop)
+			stack()
+	ul.albums
+		margin-left 1.5em
+		
 .infos, .back
 	position absolute
 	bottom $padding
 	left $padding
 
-@import 'index.styl'
-@import 'album.styl'
+.back
+	display none
+
+@import 'home.styl'
+@import 'page.styl'

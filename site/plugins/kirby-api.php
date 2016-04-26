@@ -7,7 +7,7 @@
  * $api['siblings'] is commented out because it is not nessesary in most API's
 */
 
-$prefix = "api/v1/";
+$prefix = "api/";
 
 kirby()->routes(array(
   array(
