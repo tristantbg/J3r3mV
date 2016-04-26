@@ -1,5 +1,6 @@
 .DS_Store
 Thumbs.db
+/content
 /assets/lib
 /node_modules
 /npm-debug.log
