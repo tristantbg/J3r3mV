@@ -7,6 +7,7 @@ $(function() {
     var app = {
         init: function() {
             $(window).load(function() {
+                app.deferImages();
                 $(".loader").fadeOut("fast");
                 hasher.init();
             });
@@ -18,7 +19,7 @@ $(function() {
                 var hash;
                 //hasher.prependHash = '/';
                 function handleChanges(newHash, oldHash) {
-                    console.log(newHash);
+                    console.log(oldHash);
                     hash = hasher.getHashAsArray();
                     var element = $('*[data-target="' + newHash + '"]');
                     if (hash[0] == "index") {
@@ -27,9 +28,10 @@ $(function() {
                         }
                         $body.removeClass('album infos');
                         if ($slider != null) {
-                            $slider.delay(600).fadeOut('200', function() {
-                                $(this).flickity('destroy').empty().show();
-                            });
+                            // $slider.delay(800).fadeOut('100', function() {
+                            //    $(this).flickity('destroy').empty().show();
+                            //  });
+                            $slider.flickity('destroy').empty().show();
                         }
                     }
                     if (hash[0] == "infos") {
@@ -47,10 +49,19 @@ $(function() {
                 $('[data-target]').bind('click', function(e) {
                     $el = $(this);
                     e.preventDefault();
-                    hasher.setHash($(this).data('target'));
+                    if ($el.is('.intro')) {
+                        setTimeout(function() {
+                            hasher.setHash($el.data('target'));
+                        }, 1100);
+                    } else {
+                        hasher.setHash($el.data('target'));
+                    }
                 });
                 $('.intro').click(function(event) {
                     $(this).addClass('closed');
+                });
+                $(document).keyup(function(e) {
+                    if (e.keyCode === 27) hasher.setHash('index');
                 });
                 var slidecontainer = $('.container .slider:not(".hover")');
                 // $('[href]').bind('click', function(e) {
@@ -104,6 +115,7 @@ $(function() {
                 cellSelector: '.gallery_cell',
                 imagesLoaded: true,
                 lazyLoad: 1,
+                setGallerySize: false,
                 //percentPosition: false,
                 //wrapAround: true,
                 prevNextButtons: false,
@@ -117,21 +129,26 @@ $(function() {
                     if (!cellElement) {
                         return;
                     }
-                    $(this).flickity('next', false);
-                    app.checkLastCell(flkty);
+                    app.goNext($slider);
                 });
                 $('.prev').bind('click', function(e) {
                     e.preventDefault();
-                    $slider.flickity('previous', false);
-                    app.checkLastCell(flkty);
+                    app.goPrev($slider);
                 });
                 $('.next').bind('click', function(e) {
                     e.preventDefault();
-                    $slider.flickity('next', false);
-                    app.checkLastCell(flkty);
+                    app.goNext($slider);
                 });
                 flickityFirst = false;
             }
+        },
+        goNext: function($slider) {
+            $slider.flickity('next', false);
+            app.checkLastCell(flkty);
+        },
+        goPrev: function($slider) {
+            $slider.flickity('previous', false);
+            app.checkLastCell(flkty);
         },
         loadContent: function(url, target) {
             $.ajax({
@@ -141,6 +158,14 @@ $(function() {
                     app.loadSlider();
                 }
             });
+        },
+        deferImages: function() {
+            var imgDefer = document.getElementsByTagName('img');
+            for (var i = 0; i < imgDefer.length; i++) {
+                if (imgDefer[i].getAttribute('data-src')) {
+                    imgDefer[i].setAttribute('src', imgDefer[i].getAttribute('data-src'));
+                }
+            }
         }
     };
     app.init();

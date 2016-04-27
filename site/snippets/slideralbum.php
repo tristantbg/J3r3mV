@@ -1,4 +1,10 @@
 <div class="container">
+<div class="slider albumslider">
+	
+	<?php snippet('slider') ?>
+
+</div>
+
 	<div class="slider hover">
 
 
@@ -17,10 +23,10 @@
 				<div class="gallery_cell hover hidden" data-title="<?php echo $album->uri() ?>">
 					<?php $medias = $album->medias()->yaml();?>
 					<?php if($medias[0]['contentone'] != null): ?>
-						<img class="content" src="<?php echo $album->image($medias[0]['contentone'])->width(800)->url() ?>">
+						<img class="content" data-src="<?php echo $album->image($medias[0]['contentone'])->height(700)->url() ?>" height="100%" width="auto">
 					<?php endif ?>
 					<?php if($medias[0]['contenttwo'] != null): ?>
-						<img class="content" src="<?php echo $album->image($medias[0]['contenttwo'])->width(800)->url() ?>">
+						<img class="content" data-src="<?php echo $album->image($medias[0]['contenttwo'])->height(700)->url() ?>" height="100%" width="auto">
 					<?php endif ?>
 				</div>
 
@@ -32,9 +38,5 @@
 
 
 </div>
-<div class="slider albumslider">
-	
-	<?php snippet('slider') ?>
 
-</div>
 </div>

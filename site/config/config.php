@@ -33,7 +33,8 @@ of the system, please check out http://getkirby.com/docs/advanced/options
 c::set('oembed.lazyvideo', true);
 c::set('autopublish.templates', array('project', 'item'));
 c::set('thumb.quality', 100);
-c::set('sitemap.exclude', array('error'));
+//c::set('thumbs.driver', 'im');
+c::set('sitemap.exclude', array('error','work'));
 c::set('sitemap.important', array('contact'));
 c::set('routes', array(
     array(
