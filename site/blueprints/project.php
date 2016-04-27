@@ -45,6 +45,7 @@ fields:
         label: Image 2
         type: image
         width: 1/2
+        help: Fill only if two images needed
       caption: 
         label: Caption
         type:  text
