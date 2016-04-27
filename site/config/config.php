@@ -41,5 +41,25 @@ c::set('routes', array(
         'action'  => function($uri) {
           tpl::load(kirby()->roots()->templates() . DS . 'ajax.php', array('uri' => $uri), false );
         }
+    ),
+    array(
+        'pattern' => 'work/(:any)/(:any)',
+        'action'  => function($subdir, $uid) {
+          $page = page('work/' .$subdir. '/' . $uid);
+      		go($page ? '/#/work/' .$subdir. '/' . $uid : 'error');
+        }
+    ),
+    array(
+        'pattern' => 'work',
+        'action'  => function($uri,$uid) {
+          $page = page('index');
+      		go($page);
+        }
+    ),
+    array(
+        'pattern' => 'infos',
+        'action'  => function($uri,$uid) {
+      		go('/#/infos');
+        }
     )
 ));

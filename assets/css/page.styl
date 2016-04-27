@@ -1,9 +1,29 @@
-.page
+.album-navigation
+	display none
+	position fixed
+	width 100%
+	height 100%
+	top 0
+	left 0
+	z-index 500
+	.prev, .next
+		span(1/2)
+		height 100%
+	.prev
+		cursor url('../images/prev.png') 22 8, auto
+	.next
+		cursor url('../images/next.png') 22 8, auto
+
+.album
+	.album-navigation
+		display block
+	.intro
+		display none
 	header.main_menu
 		transform(translate3D(0,-100%,0))
-	.infos
+	.btn_infos
 		display none
-	.back
+	.btn_back
 		display block
 	.slider
 		bottom 11%
@@ -18,4 +38,12 @@
 				height 100%
 				margin 0
 				padding 0
-				margin-left -6px
+				margin-left -5px
+
+.infos
+	.intro
+		display none
+	#infos, .btn_back
+		display block
+	.btn_infos
+		display none

@@ -28,3 +28,7 @@ Showdate: 1
 ----
 
 Pattern: one
+
+----
+
+Description: Charles Negre (1988) is a french photographer who lives and works in Paris since 2012 after graduating from art school ECAL in Lausanne, Switzerland.

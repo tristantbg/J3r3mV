@@ -19,7 +19,7 @@ $albums = $category->children()->visible();
 			<?php foreach ($albums as $album): ?>
 			
 				<li>
-					<a title="<?php echo $album->title()->html() ?>" href="<?php echo $album->url() ?>" data-title="<?php echo $album->uri() ?>">
+					<a title="<?php echo $album->title()->html() ?>" href="<?php echo $album->url() ?>" data-target="<?php echo $album->uri() ?>">
 					<?php echo $album->title()->html(); $date = ($album->showdate() == "1") ? ', '.$album->date('Y') : ''; echo $date ?>
 					</a>
 				</li>

@@ -17,19 +17,9 @@ fields:
     label: Show date in title
     type: checkbox
     width: 1/4
-  featuredimage:
-    label: Image
-    type: image
-    width: 1/2
-  pattern:
-    label: Pattern of images
-    type: radio
-    default: one
-    options:
-      one: 1
-      two: 2
-      three: 3
-    width: 1/2
+  description:
+    label: Description
+    type: textarea
   medias: 
     label: Images
     type: structure

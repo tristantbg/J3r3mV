@@ -6,7 +6,7 @@
 $desktop = 1100px
 $padding = 10px
 
-$primary ?= white
+$primary ?= #fff
 $secondary ?= #fff
 
 // CSS Reset
@@ -18,6 +18,7 @@ webfont('GMT', 'GMT', true, 'normal')
 boxsizing()
 
 body,html
+	width 100%
 	height 100%
 	overflow hidden
 	background-color $primary
@@ -26,12 +27,13 @@ body
 	font-family 'GMT'
 	text-rendering optimizeLegibility
 	font-smoothing()
-	font-size 21px
+	font-size 22px
+	line-height 1.1em
 	+below($desktop)
 		font-size 17px
 
-.container
-	height 100%
+p
+	margin-bottom 1em
 
 ::selection
 	background $secondary
@@ -43,6 +45,22 @@ a, a:hover, a:visited, a:focus
 	color inherit
 	text-decoration none
 	cursor pointer
+
+.wrap
+	height 100%
+	span(1)
+
+.loader
+	position fixed
+	width 100%
+	height 100%
+	top 0
+	left 0
+	background $primary
+	z-index 10000
+
+.container
+	height 100%
 
 header.main_menu
 	padding $padding
@@ -61,13 +79,32 @@ header.main_menu
 	ul.albums
 		margin-left 1.5em
 		
-.infos, .back
+.btn_infos, .btn_back
 	position absolute
 	bottom $padding
 	left $padding
+	z-index 3000
 
-.back
+.btn_back
 	display none
+
+#infos
+	position absolute
+	top 0
+	left 0
+	width 100%
+	height 100%
+	background $primary
+	padding $padding
+	z-index 2000
+	display none
+	.content
+		span(1/2)
+		margin-left 1.5em
+		margin-top 3em
+
+.flickity-enabled.is-draggable .flickity-viewport, .flickity-enabled.is-draggable .flickity-viewport.is-pointer-down
+	cursor default
 
 @import 'home.styl'
 @import 'page.styl'

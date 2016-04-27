@@ -1,5 +1,5 @@
 <?php snippet('header') ?>
 
-<?php snippet('sliderhome') ?>
+<?php snippet('slideralbum') ?>
 
 <?php snippet('footer') ?>

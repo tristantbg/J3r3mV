@@ -29,6 +29,10 @@
 	<?php endif ?>
 
 </head>
-<body <?php e(page()->isHomePage() == false, ' class="page"') ?> >
+<body <?php e(page()->isHomePage() == false, ' class="album"') ?> <?php e(strpos(page()->url(), 'infos'), ' class="infos"') ?> >
+
+<div class="wrap">
+
+<div class="loader"></div>
 
 <?php snippet('menu') ?>
