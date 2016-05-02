@@ -4,27 +4,38 @@
 	height 100%
 	top 0
 	left 0
-	background-color #FFFFFF
+	background-color #000000
 	cursor pointer
 	overflow hidden
 	transition(height,1s)
 	z-index 6000
 	.left, .right
 		span(1/2)
+		position absolute
+		top 0
 		height 100vh
 		background-size cover
 		background-position center
-	.left:hover, .right:hover
+	.left
+		left 0
+	.right
+		right 0
+	.invert
 		vendor(filter,invert(1))
+		opacity 0.5
+		z-index 10
+	.difference
+		z-index 20
+	.difference:hover
+		mix-blend-mode difference
 
 .intro.closed
 	height 0
 
 .slider
-	position absolute
-	bottom 0px
+	align(vertical)
 	width 100%
-	height 79%
+	height 74%
 	transition(all,800ms)
 	.flickity-viewport, .flickity-slider
 		height 100%

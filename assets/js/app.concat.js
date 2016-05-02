@@ -1,21 +1,21 @@
 /* globals $:false */
 var width = $(window).width(),
     height = $(window).height(),
-    $slider, flkty, flickityFirst = true,
+    $slider, $body, $intro, flkty, flickityFirst = true,
     lastCell = false;
 $(function() {
     var app = {
         init: function() {
             $(window).load(function() {
                 app.deferImages();
-                $(".loader").fadeOut("fast");
+                $(".loader").fadeOut(300);
                 hasher.init();
             });
             $(window).resize(function(event) {});
             $(document).ready(function($) {
                 var $root = '/CharlesNegre/';
-                var $body = $('body');
-                var $intro = $('.intro');
+                $body = $('body');
+                $intro = $('.intro');
                 var hash;
                 //hasher.prependHash = '/';
                 function handleChanges(newHash, oldHash) {
@@ -40,8 +40,8 @@ $(function() {
                     }
                     if (hash[0] == "work") {
                         $intro.remove();
+                        $body.addClass('album loading');
                         app.loadContent(element.attr('href') + '/ajax', slidecontainer);
-                        $body.addClass('album');
                     }
                 }
                 hasher.changed.add(handleChanges);
@@ -95,7 +95,19 @@ $(function() {
                     var album = $(this).data('target');
                     $('.slider.hover .gallery_cell[data-title="' + album + '"]').removeClass('hidden');
                 }, function() {
-                    $('.slider.hover .gallery_cell').addClass('hidden');
+                    if (!$body.hasClass('loading')) {
+                        $('.slider.hover .gallery_cell').addClass('hidden');
+                    }
+                });
+            });
+        },
+        mouseNav: function() {
+            $(window).mousemove(function(event) {
+                posX = event.pageX;
+                posY = event.pageY;
+                $('.mouse_nav').css({
+                    'top': posY + 'px',
+                    'left': posX + 'px'
                 });
             });
         },
@@ -130,6 +142,10 @@ $(function() {
                         return;
                     }
                     app.goNext($slider);
+                });
+                $slider.on('lazyLoad', function(event, cellElement) {
+                    $body.removeClass('loading');
+                    $('.slider.hover .gallery_cell').addClass('hidden');
                 });
                 $('.prev').bind('click', function(e) {
                     e.preventDefault();

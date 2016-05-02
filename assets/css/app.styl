@@ -13,7 +13,8 @@ $secondary ?= #fff
 global-reset()
 //edit()
 
-webfont('GMT', 'GMT', true, 'normal')
+webfont('U', 'U', true, 'normal')
+webfont('UI', 'UI', true, 'normal')
 
 boxsizing()
 
@@ -24,10 +25,10 @@ body,html
 	background-color $primary
 
 body
-	font-family 'GMT'
+	font-family 'U'
 	text-rendering optimizeLegibility
 	font-smoothing()
-	font-size 22px
+	font-size 1.7vw
 	line-height 1.1em
 	+below($desktop)
 		font-size 17px
@@ -41,10 +42,17 @@ p
 ::-moz-selection
 	background $secondary
 
+*
+	hideselect()
+
 a, a:hover, a:visited, a:focus
 	color inherit
+	font-family 'UI'
 	text-decoration none
 	cursor pointer
+
+[data-target], [data-target]:visited, [data-target]:hover
+	font-family 'U'
 
 .wrap
 	height 100%
@@ -101,7 +109,7 @@ header.main_menu
 	.content
 		span(1/2)
 		margin-left 1.5em
-		margin-top 3em
+		margin-top 0
 
 .flickity-enabled.is-draggable .flickity-viewport, .flickity-enabled.is-draggable .flickity-viewport.is-pointer-down
 	cursor default
