@@ -6,13 +6,25 @@
 	top 0
 	left 0
 	z-index 500
+	cursor none
+	.mouse_nav
+		position absolute
+		width 100px
+		height 100px
+		margin -50px 0 0 -50px
+		pointer-events none
+		flexbox()
+		align-items center
+		justify-content center
+	.mouse_nav::before
+		content ''
 	.prev, .next
 		span(1/2)
 		height 100%
-	.prev
-		cursor url('../images/prev.png') 22 8, auto
-	.next
-		cursor url('../images/next.png') 22 8, auto
+	.prev:hover ~ .mouse_nav::before
+		content 'Prev'
+	.next:hover ~ .mouse_nav::before
+		content 'Next'
 
 .album
 	.album-navigation
@@ -30,7 +42,10 @@
 
 .album.loading
 	.album-navigation
-		display none
+		.left, right
+			display none
+	.album-navigation .mouse_nav::before
+		content 'Loading'
 
 .infos
 	.intro

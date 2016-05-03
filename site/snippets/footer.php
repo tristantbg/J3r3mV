@@ -3,6 +3,7 @@
 <div class="album-navigation">
 	<div class="prev"></div>
 	<div class="next"></div>
+	<div class="mouse_nav"></div>
 </div>
 
 <div id="infos">

@@ -60,10 +60,26 @@ $(function() {
                 $('.intro').click(function(event) {
                     $(this).addClass('closed');
                 });
+                //esc
                 $(document).keyup(function(e) {
                     if (e.keyCode === 27) hasher.setHash('index');
                 });
-                app.mobile();
+                //left
+                $(document).keyup(function(e) {
+                    if (e.keyCode === 37 && $slider) app.goPrev($slider);
+                });
+                //right
+                $(document).keyup(function(e) {
+                    if (e.keyCode === 39 && $slider) app.goNext($slider);
+                });
+                if (Modernizr.touch) {
+                    app.mobileMenu();
+                } else {
+                    app.mouseNav();
+                    $(window).mousemove(function(event) {
+                        app.mouseNav();
+                    });
+                }
                 var slidecontainer = $('.container .slider:not(".hover")');
                 // $('[href]').bind('click', function(e) {
                 //     var el = $(this);
@@ -103,16 +119,14 @@ $(function() {
             });
         },
         mouseNav: function() {
-            $(window).mousemove(function(event) {
-                posX = event.pageX;
-                posY = event.pageY;
-                $('.mouse_nav').css({
-                    'top': posY + 'px',
-                    'left': posX + 'px'
-                });
+            posX = event.pageX;
+            posY = event.pageY;
+            $('.mouse_nav').css({
+                'top': posY + 'px',
+                'left': posX + 'px'
             });
         },
-        mobile: function() {
+        mobileMenu: function() {
             $("ul.category .title").click(function(event) {
                 var parent = $(this).parent();
                 if (!parent.hasClass('active')) {
@@ -160,11 +174,10 @@ $(function() {
                 });
                 $slider.on('cellSelect', function() {
                     var caption = $('.albumslider .gallery_cell').eq(flkty.selectedIndex).data('caption');
-                    console.log(caption);
                     if (caption != null) {
                         $('.albumslider .caption').html(caption);
                     } else {
-                      $('.albumslider .caption').empty();
+                        $('.albumslider .caption').empty();
                     }
                 });
                 $('.prev').bind('click', function(e) {
