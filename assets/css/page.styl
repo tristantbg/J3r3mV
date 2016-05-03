@@ -7,6 +7,7 @@
 	left 0
 	z-index 500
 	cursor none
+	mix-blend-mode difference
 	.mouse_nav
 		position absolute
 		width 100px
@@ -18,6 +19,7 @@
 		justify-content center
 	.mouse_nav::before
 		content ''
+		color $primary
 	.prev, .next
 		span(1/2)
 		height 100%
