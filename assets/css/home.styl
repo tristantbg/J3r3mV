@@ -40,7 +40,7 @@
 	height 74%
 	//transition(all,800ms)
 	+below($tablet)
-		height 32%
+		height 80%
 	.flickity-viewport, .flickity-slider
 		height 100%
 	.gallery_cell
@@ -54,6 +54,11 @@
 			height 100%
 			margin 0
 			padding 0
+			+below($tablet)
+				width 90%
+				height auto
+				max-width 100%
+				max-height 100%
 		.content:nth-child(n+1)
 			margin-left -1px
 		.description
@@ -62,6 +67,8 @@
 			font-size 65%
 			line-height 1.1em
 			width 33%
+			+below($tablet)
+				width 70%
 	.caption
 		span(1)
 		position absolute

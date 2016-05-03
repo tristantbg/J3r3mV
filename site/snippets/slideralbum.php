@@ -7,6 +7,8 @@
 
 </div>
 
+<?php if(s::get('device_class') == 'desktop'): ?>
+
 	<div class="slider hover">
 
 
@@ -35,10 +37,12 @@
 			<?php endforeach ?>
 
 
-<?php endif ?>
-<?php endforeach ?>
+		<?php endif ?>
+	<?php endforeach ?>
 
 
-</div>
+	</div>
+
+<?php endif; ?>
 
 </div>
