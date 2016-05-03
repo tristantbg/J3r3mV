@@ -4,6 +4,7 @@
 @import './vendor/flickity.min.css'
 
 $desktop = 1100px
+$tablet = 900px
 $padding = 10px
 
 $primary ?= #fff
@@ -28,9 +29,9 @@ body
 	font-family 'U'
 	text-rendering optimizeLegibility
 	font-smoothing()
-	font-size 1.7vw
+	font-size 1.5vw
 	line-height 1.1em
-	+below($desktop)
+	+below($tablet)
 		font-size 17px
 
 p
@@ -51,7 +52,7 @@ a, a:hover, a:visited, a:focus
 	text-decoration none
 	cursor pointer
 
-[data-target], [data-target]:visited, [data-target]:hover
+[data-target], [data-target]:visited, [data-target]:hover, [data-target]:focus
 	font-family 'U'
 
 .wrap
@@ -82,10 +83,12 @@ header.main_menu
 	transition(transform,800ms)
 	ul.category
 		span(1/2)
-		+below($desktop)
+		+below($tablet)
 			stack()
 	ul.albums
 		margin-left 1.5em
+		+below($tablet)
+			display none
 		
 .btn_infos, .btn_back
 	position absolute
@@ -110,6 +113,9 @@ header.main_menu
 		span(1/2)
 		margin-left 1.5em
 		margin-top 0
+		+below($tablet)
+			span(1)
+			padding-left 1.5em
 
 .flickity-enabled.is-draggable .flickity-viewport, .flickity-enabled.is-draggable .flickity-viewport.is-pointer-down
 	cursor default

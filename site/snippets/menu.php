@@ -13,7 +13,7 @@ $albums = $category->children()->visible();
 
 
 <ul class="category">
-	<li><?php echo $category->title()->html() ?></li>
+	<li class="title"><?php echo $category->title()->html() ?></li>
 	<li>
 		<ul class="albums">
 			<?php foreach ($albums as $album): ?>

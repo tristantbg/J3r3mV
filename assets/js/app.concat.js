@@ -63,6 +63,7 @@ $(function() {
                 $(document).keyup(function(e) {
                     if (e.keyCode === 27) hasher.setHash('index');
                 });
+                app.mobile();
                 var slidecontainer = $('.container .slider:not(".hover")');
                 // $('[href]').bind('click', function(e) {
                 //     var el = $(this);
@@ -111,6 +112,15 @@ $(function() {
                 });
             });
         },
+        mobile: function() {
+            $("ul.category .title").click(function(event) {
+                var parent = $(this).parent();
+                if (!parent.hasClass('active')) {
+                    $("ul.category.active").removeClass('active').find('ul.albums').slideToggle(800);
+                    parent.addClass('active').find('ul.albums').slideToggle(800);
+                }
+            });
+        },
         checkLastCell: function(flkty) {
             if (flkty.selectedIndex < flkty.cells.length - 1) {
                 lastCell = false;
@@ -129,13 +139,14 @@ $(function() {
                 lazyLoad: 1,
                 setGallerySize: false,
                 //percentPosition: false,
-                //wrapAround: true,
+                wrapAround: false,
                 prevNextButtons: false,
                 pageDots: false,
                 //draggable: false
             });
             flkty = $slider.data('flickity');
             lastCell = false;
+            app.checkLastCell(flkty);
             if (flickityFirst) {
                 $slider.on('staticClick', function(event, pointer, cellElement, cellIndex) {
                     if (!cellElement) {
@@ -146,6 +157,15 @@ $(function() {
                 $slider.on('lazyLoad', function(event, cellElement) {
                     $body.removeClass('loading');
                     $('.slider.hover .gallery_cell').addClass('hidden');
+                });
+                $slider.on('cellSelect', function() {
+                    var caption = $('.albumslider .gallery_cell').eq(flkty.selectedIndex).data('caption');
+                    console.log(caption);
+                    if (caption != null) {
+                        $('.albumslider .caption').html(caption);
+                    } else {
+                      $('.albumslider .caption').empty();
+                    }
                 });
                 $('.prev').bind('click', function(e) {
                     e.preventDefault();

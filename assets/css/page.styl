@@ -17,6 +17,8 @@
 .album
 	.album-navigation
 		display block
+		+below($desktop)
+			display none
 	.intro
 		display none
 	header.main_menu
@@ -25,20 +27,6 @@
 		display none
 	.btn_back
 		display block
-	.slider
-		overflow hidden
-		.flickity-viewport, .flickity-slider
-			height 100%
-		.gallery_cell
-			height 100%
-			width 100%
-			text-align center
-			.content
-				width auto
-				height 100%
-				margin 0
-				padding 0
-				margin-left -6px
 
 .album.loading
 	.album-navigation
