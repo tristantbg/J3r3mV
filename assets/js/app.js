@@ -169,8 +169,10 @@ $(function() {
                     app.goNext($slider);
                 });
                 $slider.on('lazyLoad', function(event, cellElement) {
-                    $body.removeClass('loading');
-                    $('.slider.hover .gallery_cell').addClass('hidden');
+                    setTimeout(function() {
+                        $body.removeClass('loading');
+                        $('.slider.hover .gallery_cell').addClass('hidden');
+                    }, 1000);
                 });
                 $slider.on('cellSelect', function() {
                     var caption = $('.albumslider .gallery_cell').eq(flkty.selectedIndex).data('caption');
