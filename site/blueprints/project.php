@@ -17,6 +17,19 @@ fields:
     label: Show date in title
     type: checkbox
     width: 1/4
+  featured:
+    label: Featured image
+    type:  image
+    width: 1/2
+  category:
+    label: Category
+    type:  select
+    options: field
+    width: 1/2
+    field:
+      page:  ../
+      name: categories
+      seperator: ,
   description:
     label: Description
     type: textarea

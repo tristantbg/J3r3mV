@@ -58,9 +58,9 @@ c::set('routes', array(
         }
     ),
     array(
-        'pattern' => 'infos',
+        'pattern' => 'about',
         'action'  => function($uri,$uid) {
-      		go('/#/infos');
+      		go('/#/about');
         }
     )
 ));

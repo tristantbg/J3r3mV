@@ -1,20 +1,7 @@
-<?php $infos = $pages->find('infos'); ?>
 
-<div class="album-navigation">
-	<div class="prev"></div>
-	<div class="next"></div>
-	<div class="mouse_nav"></div>
-</div>
 
-<div id="infos">
-	<a href="<?php echo $site->homePage()->url() ?>" data-target="index"><h1><?php echo $site->title()->html() ?></h1></a>
-	<div class="content"><?php echo $infos->text()->kt() ?></div>
-</div>
+</div> <!-- wrapper -->
 
-<div class="btn_infos"><a title="<?php echo $infos->title()->html() ?>" href="<?php echo $infos->url() ?>" data-target="infos"><?php echo $infos->title()->html() ?></a></div>
-<div class="btn_back"><a href="<?php echo $site->homePage()->url() ?>" data-target="index">Back</a></div>
-
-</div> 
 <?php if(!$site->googleanalytics()->empty()): ?>
   <!-- Google Analytics-->
   <script>

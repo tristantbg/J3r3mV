@@ -1,35 +1,17 @@
 <?php 
-$categories = $pages->find('work')->children()->visible();
- ?>
-
-
-<header class="main_menu">
-
-<?php 
-foreach ($categories as $category):
-if ($category->hasVisibleChildren()):
-$albums = $category->children()->visible();
+$categories = $pages->find('work')->categories()->split(',');
+$about = $pages->find('about');
 ?>
 
 
-<ul class="category">
-	<li class="title"><?php echo $category->title()->html() ?></li>
-	<li>
-		<ul class="albums">
-			<?php foreach ($albums as $album): ?>
-			
-				<li>
-					<a title="<?php echo $album->title()->html() ?>" href="<?php echo $album->url() ?>" data-target="<?php echo $album->uri() ?>">
-					<?php echo $album->title()->html(); $date = ($album->showdate() == "1") ? ', '.$album->date('Y') : ''; echo $date ?>
-					</a>
-				</li>
-
-			<?php endforeach ?>
-		</ul>
-	</li>
-</ul>
-
-<?php endif ?>
-<?php endforeach ?>
-	
+<header class="main_menu">
+	<ul>
+		<li class="category" data-target="filter/all">All</li>
+		<?php foreach ($categories as $category): ?>
+				<li class="category" data-target="filter/<?php echo tagslug($category) ?>"><?php echo ucwords($category) ?></li>
+		<?php endforeach ?>
+	</ul>
 </header>
+
+
+<span class="about" data-target="page/about"><a href="<?php echo $about->url() ?>"><?php echo $about->title()->html() ?></a></span>

@@ -11,8 +11,6 @@
 	<meta property="og:url" content="<?php echo $site->homePage()->url() ?>"/>
 	<meta property="og:description" content="<?php echo $site->text()->html() ?>"/>
 	<meta property="og:image" content="<?= url('assets/images/og_image.jpg') ?>"/>
-	<link rel="shortcut icon" href="<?= url('assets/images/favicon.ico') ?>">
-	<link rel="icon" href="<?= url('assets/images/favicon.ico') ?>" type="image/x-icon">
 
 	<?php 
 	echo css('assets/css/app.min.css');
@@ -29,10 +27,12 @@
 	<?php endif ?>
 
 </head>
-<body <?php e(page()->isHomePage() == false, ' class="album"') ?> <?php e(strpos(page()->url(), 'infos'), ' class="infos"') ?> >
+<body <?php e(page()->isHomePage() == false, ' class="page"') ?> >
 
 <div class="wrap">
 
 <div class="loader"></div>
 
 <?php snippet('menu') ?>
+
+<div class="main-title"><h1><?php echo $site->title()->html() ?></h1></div>

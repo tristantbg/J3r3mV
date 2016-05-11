@@ -5,7 +5,7 @@
 
 $desktop = 1100px
 $tablet = 900px
-$padding = 10px
+$padding = 30px
 
 $primary ?= #fff
 
@@ -13,8 +13,7 @@ $primary ?= #fff
 global-reset()
 //edit()
 
-webfont('U', 'U', true, 'normal')
-webfont('UI', 'UI', true, 'normal')
+webfont('AG', 'AG', true, 'normal')
 
 boxsizing()
 
@@ -25,7 +24,7 @@ body,html
 	background-color $primary
 
 body
-	font-family 'U'
+	font-family 'AG'
 	text-rendering optimizeLegibility
 	font-smoothing()
 	font-size 23px
@@ -47,16 +46,39 @@ p
 
 a, a:hover, a:visited, a:focus
 	color inherit
-	font-family 'UI'
 	text-decoration none
 	cursor pointer
 
 [data-target], [data-target]:visited, [data-target]:hover, [data-target]:focus
-	font-family 'U'
+	font-family 'AG'
+
+.columns
+	margin-right -2rem
+	
+.column
+	display inline-block
+	vertical-align top
+	padding-right 2rem
+	
+.columns-1 .column
+	width 100%
+	
+.columns-2 .column
+	width 50%
+	
+.columns-3 .column
+	width 33.33%
+	
+.columns-4 .column
+	width 25%
+	
+.columns-5 .column
+	width 20%
 
 .wrap
 	height 100%
 	span(1)
+	padding $padding
 
 .loader
 	position fixed
@@ -71,29 +93,22 @@ a, a:hover, a:visited, a:focus
 	height 100%
 
 header.main_menu
-	padding $padding
 	position fixed
-	width 100%
-	top 0
-	left 0
-	mix-blend-mode difference
-	color #fff
-	z-index 1000
-	transition(transform,800ms)
-	ul.category
-		span(1/2)
-		+below($tablet)
-			stack()
-	ul.albums
-		margin-left 1.5em
-		+below($tablet)
-			display none
-		
-.btn_infos, .btn_back
-	position absolute
 	bottom $padding
 	left $padding
-	z-index 3000
+	z-index 1000
+	ul .category
+		transition(letter-spacing,300ms)
+		letter-spacing 0
+		cursor pointer
+	ul .category:hover, ul .category.active
+		letter-spacing .1em
+		
+.about
+	position fixed
+	top $padding
+	left $padding
+	z-index 1000
 
 .btn_back
 	display none
@@ -115,9 +130,3 @@ header.main_menu
 		+below($tablet)
 			span(1)
 			padding-left 1.5em
-
-.flickity-enabled.is-draggable .flickity-viewport, .flickity-enabled.is-draggable .flickity-viewport.is-pointer-down
-	cursor default
-
-@import 'home.styl'
-@import 'page.styl'

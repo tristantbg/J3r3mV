@@ -19,7 +19,7 @@ $(function() {
                 var hash;
                 //hasher.prependHash = '/';
                 function handleChanges(newHash, oldHash) {
-                    console.log(oldHash);
+                    //console.log(oldHash);
                     hash = hasher.getHashAsArray();
                     var element = $('*[data-target="' + newHash + '"]');
                     if (hash[0] == "index") {
@@ -147,51 +147,7 @@ $(function() {
             }
         },
         loadSlider: function() {
-            $slider = $('.slider.albumslider').flickity({
-                cellSelector: '.gallery_cell',
-                imagesLoaded: true,
-                lazyLoad: 1,
-                setGallerySize: false,
-                //percentPosition: false,
-                wrapAround: false,
-                prevNextButtons: false,
-                pageDots: false,
-                //draggable: false
-            });
-            flkty = $slider.data('flickity');
-            lastCell = false;
-            app.checkLastCell(flkty);
-            if (flickityFirst) {
-                $slider.on('staticClick', function(event, pointer, cellElement, cellIndex) {
-                    if (!cellElement) {
-                        return;
-                    }
-                    app.goNext($slider);
-                });
-                $slider.on('lazyLoad', function(event, cellElement) {
-                    setTimeout(function() {
-                        $body.removeClass('loading');
-                        $('.slider.hover .gallery_cell').addClass('hidden');
-                    }, 1000);
-                });
-                $slider.on('cellSelect', function() {
-                    var caption = $('.albumslider .gallery_cell').eq(flkty.selectedIndex).data('caption');
-                    if (caption != null) {
-                        $('.albumslider .caption').html(caption);
-                    } else {
-                        $('.albumslider .caption').empty();
-                    }
-                });
-                $('.prev').bind('click', function(e) {
-                    e.preventDefault();
-                    app.goPrev($slider);
-                });
-                $('.next').bind('click', function(e) {
-                    e.preventDefault();
-                    app.goNext($slider);
-                });
-                flickityFirst = false;
-            }
+            
         },
         goNext: function($slider) {
             $slider.flickity('next', false);

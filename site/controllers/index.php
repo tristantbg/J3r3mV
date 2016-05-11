@@ -14,20 +14,23 @@ return function($pages) {
     // shuffle($galleryImages->data);
     // $galleryImages = $galleryImages->limit(2);
 
-    $galleryPage = $pages->find('work');
-    $pairs = $galleryPage->intro()->toStructure();
-    $galleryImages = new Collection();
-    foreach ($pairs as $p) {
-    	$left = $p->contentone();
-    	$right = $p->contenttwo();
-    	if (!$left->empty() && !$right->empty()) {
-    		$galleryImages->data[] = array('left' => $galleryPage->image($left)->url(), 'right' => $galleryPage->image($right)->url());
-    	}
-        
-    }
-    shuffle($galleryImages->data);
-    $galleryImages = $galleryImages->limit(1);
 
-  return compact('galleryImages');
+
+
+  //   $galleryPage = $pages->find('work');
+  //   $pairs = $galleryPage->intro()->toStructure();
+  //   $galleryImages = new Collection();
+  //   foreach ($pairs as $p) {
+  //   	$left = $p->contentone();
+  //   	$right = $p->contenttwo();
+  //   	if (!$left->empty() && !$right->empty()) {
+  //   		$galleryImages->data[] = array('left' => $galleryPage->image($left)->url(), 'right' => $galleryPage->image($right)->url());
+  //   	}
+        
+  //   }
+  //   shuffle($galleryImages->data);
+  //   $galleryImages = $galleryImages->limit(1);
+
+  // return compact('galleryImages');
 
 };
