@@ -43,13 +43,13 @@ c::set('routes', array(
           tpl::load(kirby()->roots()->templates() . DS . 'ajax.php', array('uri' => $uri), false );
         }
     ),
-    array(
-        'pattern' => 'work/(:any)/(:any)',
-        'action'  => function($subdir, $uid) {
-          $page = page('work/' .$subdir. '/' . $uid);
-      		go($page ? '/#/work/' .$subdir. '/' . $uid : 'error');
-        }
-    ),
+    // array(
+    //     'pattern' => 'work/(:any)/(:any)',
+    //     'action'  => function($subdir, $uid) {
+    //       $page = page('work/' .$subdir. '/' . $uid);
+    //   		go($page ? '/#/work/' .$subdir. '/' . $uid : 'error');
+    //     }
+    // ),
     array(
         'pattern' => 'work',
         'action'  => function($uri,$uid) {
@@ -64,3 +64,9 @@ c::set('routes', array(
         }
     )
 ));
+
+// Preload thumbnails
+kirby()->hook('panel.file.upload', function($file) { 
+  $file->height(site()->thumbmin()->value());
+  $file->height(site()->thumbmax()->value());
+});

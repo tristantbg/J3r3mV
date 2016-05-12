@@ -36,3 +36,7 @@ fields:
     icon: code
     help: Tracking ID in the form UA-XXXXXXXX-X. Keep this field empty if you are not using it.
     width: 1/2
+  ogimage:
+    label: Facebook OpenGraph image
+    type: image
+    width: 1/2

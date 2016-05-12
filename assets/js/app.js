@@ -27,20 +27,12 @@ $(function() {
                             $intro.remove();
                         }
                         $body.removeClass('album infos');
-                        if ($slider != null) {
-                            // $slider.delay(800).fadeOut('100', function() {
-                            //    $(this).flickity('destroy').empty().show();
-                            //  });
-                            $slider.flickity('destroy').empty().show();
-                        }
                     }
-                    if (hash[0] == "infos") {
+                    if (hash[0] == "about") {
                         $intro.remove();
                         $body.addClass('infos');
                     }
                     if (hash[0] == "work") {
-                        $intro.remove();
-                        $body.addClass('album loading');
                         app.loadContent(element.attr('href') + '/ajax', slidecontainer);
                     }
                 }
@@ -80,42 +72,7 @@ $(function() {
                         app.mouseNav();
                     });
                 }
-                var slidecontainer = $('.container .slider:not(".hover")');
-                // $('[href]').bind('click', function(e) {
-                //     var el = $(this);
-                //     e.preventDefault();
-                //     History.pushState({
-                //         key: 'page'
-                //     }, null, $root + el.data('title'));
-                //     app.loadContent(el.attr('href') + '/ajax', slidecontainer);
-                //     if (el.is(".main_menu a")) {
-                //         $body.toggleClass('page');
-                //     }
-                // });
-                // $('.main_menu .albums a').hover(function() {
-                //     slidecontainer.empty().show();
-                //     var albumJSON = window.location.origin + '/CharlesNegre/api/' + $(this).data('target');
-                //     $.getJSON(albumJSON, function(data) {
-                //         var pattern = data.page.content['pattern'];
-                //         var images = data.images;
-                //         if (pattern == 'one') {
-                //             slidecontainer.html('<div class="gallery_cell"><img class="content" src="' + data.page.url + '/' + images[0].safeName + '?w=1000&q=100"></div>');
-                //         } else {
-                //             slidecontainer.html('<div class="gallery_cell"><img class="content" src="' + data.page.url + '/' + images[0].safeName + '?w=1000&q=100"><img class="content" src="' + data.page.url + '/' + images[1].safeName + '?w=1000&q=100"></div>');
-                //         }
-                //     });
-                // }, function() {
-                //     slidecontainer.hide();
-                //     return false;
-                // });
-                $('.main_menu .albums a').hover(function() {
-                    var album = $(this).data('target');
-                    $('.slider.hover .gallery_cell[data-title="' + album + '"]').removeClass('hidden');
-                }, function() {
-                    if (!$body.hasClass('loading')) {
-                        $('.slider.hover .gallery_cell').addClass('hidden');
-                    }
-                });
+                var slidecontainer = $('.content');
             });
         },
         mouseNav: function() {
@@ -135,34 +92,12 @@ $(function() {
                 }
             });
         },
-        checkLastCell: function(flkty) {
-            if (flkty.selectedIndex < flkty.cells.length - 1) {
-                lastCell = false;
-            }
-            if (lastCell) {
-                hasher.setHash('index');
-            }
-            if (flkty.selectedIndex == flkty.cells.length - 1) {
-                lastCell = true;
-            }
-        },
-        loadSlider: function() {
-            
-        },
-        goNext: function($slider) {
-            $slider.flickity('next', false);
-            app.checkLastCell(flkty);
-        },
-        goPrev: function($slider) {
-            $slider.flickity('previous', false);
-            app.checkLastCell(flkty);
-        },
         loadContent: function(url, target) {
             $.ajax({
                 url: url,
                 success: function(data) {
                     $(target).html(data);
-                    app.loadSlider();
+                    $body.addClass('page');
                 }
             });
         },
