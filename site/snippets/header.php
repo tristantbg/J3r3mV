@@ -60,4 +60,4 @@
 
 <?php snippet('menu') ?>
 
-<div class="main-title"><h1><?php echo $site->title()->html() ?></h1></div>
+<div id="main_title"><h1><?php echo $site->title()->html() ?></h1></div>

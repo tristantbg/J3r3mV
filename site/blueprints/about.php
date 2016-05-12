@@ -10,6 +10,6 @@ fields:
   title:
     label: Title
     type:  text
-  text:
-    label: Text
+  description:
+    label: Content
     type:  textarea

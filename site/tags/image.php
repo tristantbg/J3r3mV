@@ -80,6 +80,7 @@ kirbytext::$tags['image'] = array(
 			$srcset .= resizeOnDemand($file, $i) . ' ' . $i . 'w,';
 		}
       return html::img($url, array(
+      	'src' => resizeOnDemand($file, 300),
         'width'  => '100%',
         'height' => 'auto',
         'class'  => 'lazyload',

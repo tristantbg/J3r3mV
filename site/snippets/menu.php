@@ -4,7 +4,7 @@ $about = $pages->find('about');
 ?>
 
 
-<header class="main_menu">
+<header id="main_menu">
 	<ul>
 		<li class="category" data-target="filter/all">All</li>
 		<?php foreach ($categories as $category): ?>
@@ -14,4 +14,4 @@ $about = $pages->find('about');
 </header>
 
 
-<span class="about" data-target="about"><a href="<?php echo $about->url() ?>"><?php echo $about->title()->html() ?></a></span>
+<span id="about"><a href="<?php echo $about->url() ?>" data-target="about"><?php echo $about->title()->html() ?></a></span>
