@@ -107,13 +107,15 @@ header#main_menu
 		letter-spacing .1em
 
 .lazyload, .lazyloaded
-	transition(opacity)
+	transition()
 
 .lazyload
-	opacity 0
+	opacity 0.3
+	vendor(filter, blur(5px))
 
 .lazyloaded
 	opacity 1
+	vendor(filter, blur(0px))
 
 #about
 	position fixed
@@ -153,7 +155,7 @@ header#main_menu
 		width 200px
 
 .content
-	transition()
+	transition(left)
 	span(1/2)
 	position fixed
 	left 100%

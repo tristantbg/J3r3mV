@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "dependencies": {
     "jquery": "~2.1.1",
-    "hasher": "^1.2.0",
     "lazysizes": "^1.4.0",
     "scrollmagic": "^2.0.5",
-    "gsap": "^1.18.2"
+    "gsap": "^1.18.2",
+    "scroll-scope": "^0.1.0",
+    "history.js": "^1.8.0"
   }
 }

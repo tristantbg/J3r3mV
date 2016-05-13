@@ -6,9 +6,9 @@ $about = $pages->find('about');
 
 <header id="main_menu">
 	<ul>
-		<li class="category" data-target="filter/all">All</li>
+		<li class="category" data-filter="all">All</li>
 		<?php foreach ($categories as $category): ?>
-				<li class="category" data-target="filter/<?php echo tagslug($category) ?>"><?php echo ucwords($category) ?></li>
+				<li class="category" data-filter="<?php echo tagslug($category) ?>"><?php echo ucwords($category) ?></li>
 		<?php endforeach ?>
 	</ul>
 </header>

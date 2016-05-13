@@ -8,75 +8,64 @@ $(function() {
             $(window).load(function() {
                 app.deferImages();
                 $(".loader").fadeOut(300);
-                hasher.init();
             });
             $(window).resize(function(event) {
                 app.sizeSet();
             });
             $(document).ready(function($) {
-                var $root = '/CharlesNegre/';
                 $body = $('body');
                 $intro = $('.intro');
-                $slidecontainer = $('.content');
+                $slidecontainer = $('.content .inner');
                 $projects = $('.project');
                 $categories = $('ul .category');
                 $mouse_nav = $('.mouse_nav');
                 var hash;
-                //hasher.prependHash = '/';
-                function handleChanges(newHash, oldHash) {
-                    //console.log(oldHash);
-                    hash = hasher.getHashAsArray();
-                    var element = $('*[data-target="' + newHash + '"]');
-                    if (hash[0] == 'filter') {
-                        var filter = hash[1];
-                        if (filter == 'all') {
-                            $categories.removeClass('active');
-                            $projects.removeClass('hidden');
-                            TweenMax.to($projects, 0.5, {
-                                scale: 1,
-                                autoAlpha: 1,
-                                ease: Power1.easeInOut,
-                            });
-                        } else {
-                            $categories.removeClass('active');
-                            element.addClass('active');
-                            TweenMax.to($('.project.hidden'), 0.5, {
-                                scale: 1,
-                                autoAlpha: 1,
-                                ease: Power1.easeInOut,
-                            });
-                            $targets = $('.project:not([data-filter="' + filter + '"])').addClass('hidden');
-                            TweenMax.to($targets, 0.5, {
-                                scale: 0,
-                                autoAlpha: 0,
-                                rotation: 0,
-                                ease: Power1.easeInOut,
-                            });
-                        }
-                    } else {
-                        app.loadContent(newHash + '/ajax', $slidecontainer);
-                    }
+                $(document).scrollScope();
+                if (app.getParameters('filter')) {
+                    var filter = app.getParameters('filter');
+                    var element = $('.category[data-filter="' + filter + '"]');
+                    app.filter(filter, element);
                 }
-                hasher.changed.add(handleChanges);
-                hasher.initialized.add(handleChanges);
+                History.Adapter.bind(window, 'statechange', function() { // Note: We are using statechange instead of popstate
+                    var State = History.getState(); // Note: We are using History.getState() instead of event.state
+                    console.log(State);
+                    var content = State.data;
+                    if (content.type == 'page') {
+                        $slidecontainer.fadeOut(300, function() {
+                            app.loadContent(State.url + '/ajax', $slidecontainer);
+                        });
+                    } else if (content.type == 'filter') {
+                        var filter = content.filter;
+                        var element = $('.category[data-filter="' + filter + '"]');
+                        app.filter(filter, element);
+                    } else {
+                        $body.removeClass('page');
+                    }
+                });
                 $('[data-target]').bind('click', function(e) {
                     $el = $(this);
                     e.preventDefault();
-                    if ($el.is('.intro')) {
-                        setTimeout(function() {
-                            hasher.setHash($el.data('target'));
-                        }, 1100);
-                    } else {
-                        hasher.setHash($el.data('target'));
-                    }
+                    History.pushState({
+                        type: 'page'
+                    }, "Jeremy Vitte | " + $el.data('title'), $el.attr('href'));
+                });
+                $('.category[data-filter]').bind('click', function(e) {
+                    $el = $(this);
+                    var url = window.location.href.split(/[?#]/)[0];
+                    var filter = $el.data('filter');
+                    e.preventDefault();
+                    History.pushState({
+                        type: 'filter',
+                        filter: filter
+                    }, document.getElementsByTagName("title")[0].innerHTML, url + "?filter=" + filter);
                 });
                 $('.intro').click(function(event) {
                     $(this).addClass('closed');
                 });
                 $projects.hover(function() {
-                  $mouse_nav.html($(this).data('title'));
+                    $mouse_nav.html($(this).data('title'));
                 }, function() {
-                  $mouse_nav.html('');
+                    $mouse_nav.html('');
                 });
                 //esc
                 $(document).keyup(function(e) {
@@ -99,6 +88,44 @@ $(function() {
                 }
             });
         },
+        getParameters: function(val) {
+            var result = null,
+                tmp = [];
+            location.search
+                //.replace ( "?", "" ) 
+                // this is better, there might be a question mark inside
+                .substr(1).split("&").forEach(function(item) {
+                    tmp = item.split("=");
+                    if (tmp[0] === val) result = decodeURIComponent(tmp[1]);
+                });
+            return result;
+        },
+        filter: function(filter, element) {
+            if (filter == 'all') {
+                $categories.removeClass('active');
+                $projects.removeClass('hidden');
+                TweenMax.to($projects, 0.5, {
+                    scale: 1,
+                    autoAlpha: 1,
+                    ease: Power1.easeInOut,
+                });
+            } else {
+                $categories.removeClass('active');
+                element.addClass('active');
+                TweenMax.to($('.project.hidden'), 0.5, {
+                    scale: 1,
+                    autoAlpha: 1,
+                    ease: Power1.easeInOut,
+                });
+                $targets = $('.project:not([data-filter="' + filter + '"])').addClass('hidden');
+                TweenMax.to($targets, 0.5, {
+                    scale: 0,
+                    autoAlpha: 0,
+                    rotation: 0,
+                    ease: Power1.easeInOut,
+                });
+            }
+        },
         sizeSet: function() {
             width = $(window).width();
             height = $(window).height();
@@ -107,19 +134,17 @@ $(function() {
             $(window).mousemove(function(event) {
                 posX = event.pageX;
                 posY = event.pageY;
-
-                if (posX < width / 4) {
+                if (posX < width / 4 && $body.hasClass('page') || posX < width / 2 && !$body.hasClass('page')) {
                     $('.mouse_nav').css({
-                    'top': posY + 'px',
-                    'left' : (posX + 20) + 'px',
-                });
+                        'top': posY + 'px',
+                        'left': (posX + 20) + 'px',
+                    });
                 } else {
                     $('.mouse_nav').css({
-                    'top': posY + 'px',
-                    'left' : (posX - $mouse_nav.outerWidth() - 20) + 'px',
-                });
+                        'top': posY + 'px',
+                        'left': (posX - $mouse_nav.outerWidth() - 20) + 'px',
+                    });
                 }
-                
             });
         },
         scrollEffect: function() {
@@ -171,11 +196,13 @@ $(function() {
             });
         },
         loadContent: function(url, target) {
+            $slidecontainer.scrollTop(0);
             $.ajax({
                 url: url,
                 success: function(data) {
                     $(target).html(data);
                     $body.addClass('page');
+                    $slidecontainer.fadeIn(300);
                 }
             });
         },
