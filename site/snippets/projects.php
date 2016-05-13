@@ -17,4 +17,3 @@ $projects = $pages->find('work')->index()->filterBy('template', 'project')->visi
 <div class="mouse_nav"></div>
 	
 </div>
-
