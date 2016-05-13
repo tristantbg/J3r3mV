@@ -43,24 +43,11 @@ c::set('routes', array(
           tpl::load(kirby()->roots()->templates() . DS . 'ajax.php', array('uri' => $uri), false );
         }
     ),
-    // array(
-    //     'pattern' => 'work/(:any)/(:any)',
-    //     'action'  => function($subdir, $uid) {
-    //       $page = page('work/' .$subdir. '/' . $uid);
-    //   		go($page ? '/#/work/' .$subdir. '/' . $uid : 'error');
-    //     }
-    // ),
     array(
         'pattern' => 'work',
         'action'  => function($uri,$uid) {
-          $page = page('index');
+          $page = site()->homePage();
       		go($page);
-        }
-    ),
-    array(
-        'pattern' => 'about',
-        'action'  => function($uri,$uid) {
-      		go('/#/about');
         }
     )
 ));

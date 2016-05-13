@@ -18,8 +18,3 @@ $projects = $pages->find('work')->index()->filterBy('template', 'project')->visi
 	
 </div>
 
-<div class="content" data-scroll-scope>
-
-<div class="inner"></div>
-	
-</div>
