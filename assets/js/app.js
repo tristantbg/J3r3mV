@@ -106,24 +106,24 @@ $(function() {
                 $categories.removeClass('active');
                 $projects.removeClass('hidden');
                 TweenMax.to($projects, 0.5, {
-                    scale: 1,
+                    y: 0,
                     autoAlpha: 1,
-                    ease: Power1.easeInOut,
+                    ease: Power1.easeOut,
                 });
             } else {
                 $categories.removeClass('active');
                 element.addClass('active');
                 TweenMax.to($('.project.hidden'), 0.5, {
-                    scale: 1,
+                    y: 0,
                     autoAlpha: 1,
-                    ease: Power1.easeInOut,
+                    ease: Power1.easeOut,
                 });
                 $targets = $('.project:not([data-filter="' + filter + '"])').addClass('hidden');
                 TweenMax.to($targets, 0.5, {
-                    scale: 0,
-                    autoAlpha: 0,
+                    y: height,
                     rotation: 0,
-                    ease: Power1.easeInOut,
+                    autoAlpha: 0,
+                    ease: Power1.easeIn,
                 });
             }
         },
