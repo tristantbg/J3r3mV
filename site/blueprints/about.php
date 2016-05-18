@@ -2,14 +2,22 @@
 
 title: About
 files: false
-pages: true
-  template: page
+pages: false
 deletable: false
-preview: true
+preview: false
 fields:
   title:
     label: Title
     type:  text
+  subtitle:
+    label: Subtitle
+    type:  textarea
   description:
     label: Content
+    type:  textarea
+  clients:
+    label: Clients in Magazines
+    type:  textarea
+  copyright:
+    label: Copyright
     type:  textarea
