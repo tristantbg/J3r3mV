@@ -2,13 +2,15 @@
 $projects = $pages->find('work')->index()->filterBy('template', 'project')->visible();
 ?>
 
-<div class="projects" data-scroll-scope>
+<div class="projects">
+
+<div class="offset"></div>
 
 <?php foreach ($projects as $project) :?>
 
 	<div class="project" data-title="<?php echo $project->title()->html() ?>" data-filter="<?php echo tagslug($project->category()) ?>">
 		<a href="<?php echo $project->url() ?>" data-title="<?php echo $project->title()->html() ?>" data-target="<?php echo $project->uri() ?>">
-			<img src="<?php echo resizeOnDemand($project->featured()->toFile(), 300) ?>" alt="<?php echo $project->title()->html().' — © '.$project->date("Y").', '.$site->title(); ?>" width="100%" height="auto">
+			<img class="project-img" src="<?php echo resizeOnDemand($project->featured()->toFile(), 300) ?>" alt="<?php echo $project->title()->html().' — © '.$project->date("Y").', '.$site->title(); ?>" width="100%" height="auto">
 		</a>
 	</div>
 

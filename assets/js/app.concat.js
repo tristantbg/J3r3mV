@@ -2,6 +2,7 @@
 var width = $(window).width(),
     height = $(window).height(),
     $slidecontainer, $body, $intro, $mouse_nav;
+
 $(function() {
     var app = {
         init: function() {
@@ -148,23 +149,33 @@ $(function() {
             });
         },
         scrollEffect: function() {
+            var ySpeed = ['0%','0%','0%','-70%','50%','100%','-100%'];
             var controller = new ScrollMagic.Controller({
+                globalSceneOptions: {
+                    triggerHook: 'onLeave'
+                }
+            });
+            var parallax = new ScrollMagic.Controller({
                 globalSceneOptions: {
                     triggerHook: 'onEnter'
                 }
             });
-            var parallax = new ScrollMagic.Controller();
             //var introAnim = TweenMax.fromTo("#main-title", 1, {opacity: "1"}, {opacity: "0"});
             var padding = $('#main_menu').css('left');
-            var introAnim = new TimelineMax().to("#main_menu", 0, {
+            var introAnim = new TimelineMax()
+            .to("#main_menu", 0, {
                 x: "-100%",
                 left: '0'
             }).to("#about", 0, {
                 x: "-100%",
                 left: '0'
-            }).to("#main_title", 0.6, {
+            }).to("#main_title", 0.5, {
+                opacity: "1"
+            })
+            .to("#main_title", 0.5, {
                 opacity: "0"
-            }).to("#main_menu", 0.3, {
+            })
+            .to("#main_menu", 0.3, {
                 x: "0%",
                 left: padding
             }, '-=0.3').to("#about", 0.3, {
@@ -172,16 +183,18 @@ $(function() {
                 left: padding
             }, '-=0.3');
             var scene = new ScrollMagic.Scene({
-                triggerElement: ".projects",
+                triggerElement: ".offset",
                 duration: "100%"
             }).setTween(introAnim).addTo(controller);
-            var projects = document.querySelectorAll(".project");
+
+            var projects = document.querySelectorAll(".project-img");
             for (var i = 0; i < projects.length; i++) {
+                TweenLite.to(projects[i], 0, {width: rand(50, 70)+"%", yPercent: rand(0, 50), xPercent: rand(0, 50), rotation: rand(-10, 10)});
                 new ScrollMagic.Scene({
                     triggerElement: projects[i],
-                    duration: "100%"
+                    duration: rand(100,300)+"%"
                 }).setTween(projects[i], {
-                    y: rand(30, -100) + "%",
+                    yPercent: arrayRand(ySpeed),
                     rotation: rand(-30, 30)
                 }).addTo(parallax);
             }

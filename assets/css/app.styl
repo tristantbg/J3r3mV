@@ -131,6 +131,7 @@ header#main_menu
 	top 50%
 	margin-top -1em
 	pointer-events none
+	z-index 1000
 	h1
 		transition(font-size)
 		font-size 8vw
@@ -141,8 +142,10 @@ header#main_menu
 	//flexbox()
 	//justify-content space-between
 	//flex-wrap wrap
-	margin-top 100vh
 	min-height 100vh
+	.offset
+		height 100vh
+		width 100%
 	.mouse_nav
 		position absolute
 		height 100px
@@ -151,8 +154,24 @@ header#main_menu
 		flexbox()
 		align-items center
 	.project
+		// position absolute
+		// top 0
+		// left 0
+		// vendor(transform-style, preserve-3d)
+		// transform-origin center
+		// display inline-block
+		position relative
 		float left
-		width 200px
+		width 25%
+		height 25vw
+		transform-origin center
+		img
+			position absolute
+			width 50%
+			height auto
+			top 50%
+			left 50%
+			transform(translate(-50%,-50%))
 
 .content
 	transition(left)
@@ -190,6 +209,8 @@ body.page
 			font-size 6vw
 	.projects
 		span(1/2)
+		.project
+			height 13vw
 	.content
 		left 50%
 	.content::before
