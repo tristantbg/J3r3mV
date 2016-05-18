@@ -20,6 +20,7 @@ $(function() {
                 $projects = $('.project');
                 $categories = $('ul .category');
                 $mouse_nav = $('.mouse_nav');
+                app.sizeSet();
                 var hash;
                 $(document).scrollScope();
                 if (app.getParameters('filter')) {
@@ -130,6 +131,10 @@ $(function() {
         sizeSet: function() {
             width = $(window).width();
             height = $(window).height();
+            $projects.css({
+              width: width/4,
+              height: width/4
+            });
         },
         mouseNav: function() {
             $(window).mousemove(function(event) {
