@@ -14,4 +14,4 @@ $about = $pages->find('about');
 </header>
 
 
-<span id="about"><a href="<?php echo $about->url() ?>" data-target="about"><?php echo $about->title()->html() ?></a></span>
+<span id="about"><a href="<?php echo $about->url() ?>" data-title="<?php echo $about->title()->html() ?>" data-target="about"><?php echo $about->title()->html() ?></a></span>

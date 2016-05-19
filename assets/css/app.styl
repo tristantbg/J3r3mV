@@ -7,7 +7,8 @@ $desktop = 1100px
 $tablet = 900px
 $padding = 30px
 
-$primary ?= #fff
+$primary ?= #FFF
+$font ?= 'Helvetica'
 
 // CSS Reset
 global-reset()
@@ -26,13 +27,15 @@ body,html
 	background-color $primary
 
 body
-	font-family 'AG'
+	font-family $font
 	text-rendering optimizeLegibility
 	font-smoothing()
-	font-size 21px
+	font-size 14px
 	line-height 1.1em
+	font-weight 400
+	text-transform uppercase
 	+below($tablet)
-		font-size 17px
+		font-size 12px
 
 p
 	margin-bottom 1em
@@ -52,7 +55,7 @@ a, a:hover, a:visited, a:focus
 	cursor pointer
 
 [data-target], [data-target]:visited, [data-target]:hover, [data-target]:focus
-	font-family 'AG'
+	font-family $font
 
 .columns
 	margin-right -2rem
@@ -99,6 +102,8 @@ header#main_menu
 	bottom $padding
 	left $padding
 	z-index 1000
+	-webkit-backface-visibility hidden
+	backface-visibility hidden
 	ul .category
 		transition(letter-spacing,300ms)
 		letter-spacing 0
@@ -122,6 +127,8 @@ header#main_menu
 	top $padding
 	left $padding
 	z-index 1000
+	-webkit-backface-visibility hidden
+	backface-visibility hidden
 
 #main_title
 	transition(width)
@@ -132,9 +139,13 @@ header#main_menu
 	margin-top -1em
 	pointer-events none
 	z-index 1000
+	font-family 'AG'
+	text-transform none
+	-webkit-backface-visibility hidden
+	backface-visibility hidden
 	h1
 		transition(font-size)
-		font-size 8vw
+		font-size 7vw
 
 .projects
 	transition(width)
@@ -143,6 +154,7 @@ header#main_menu
 	//justify-content space-between
 	//flex-wrap wrap
 	min-height 200vh
+	margin-bottom 50vh
 	.offset
 		height 100vh
 		width 100%
@@ -165,6 +177,9 @@ header#main_menu
 		width 25%
 		height 25vw
 		transform-origin center
+		vendor(filter,blur(0px))
+		-webkit-backface-visibility hidden
+		backface-visibility hidden
 		img
 			position absolute
 			width 50%
@@ -185,6 +200,8 @@ header#main_menu
 	.inner
 		padding $padding
 		overflow-y scroll
+	.page_content
+		text-transform none
 	h1
 		text-transform uppercase
 	h1, p, img
@@ -236,7 +253,7 @@ body.page
 	.clients_content
 		margin-left 1em
 	.copyright
-		font-size .7rem
+		font-size .5rem
 		line-height 1.1em
 		p
 			margin-bottom 0

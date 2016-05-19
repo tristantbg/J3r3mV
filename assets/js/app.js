@@ -44,7 +44,7 @@ $(function() {
                         $body.removeClass('page');
                     }
                 });
-                $('[data-target]').bind('click', function(e) {
+                $('body').on('click', '[data-target]',function(e) {
                     $el = $(this);
                     e.preventDefault();
                     History.pushState({
@@ -106,25 +106,21 @@ $(function() {
             if (filter == 'all') {
                 $categories.removeClass('active');
                 $projects.removeClass('hidden');
-                TweenMax.to($projects, 0.5, {
-                    y: 0,
-                    autoAlpha: 1,
+                TweenMax.to($projects, 0.4, {
+                    webkitFilter:"blur(0px)",
                     ease: Power1.easeOut,
                 });
             } else {
                 $categories.removeClass('active');
                 element.addClass('active');
-                TweenMax.to($('.project.hidden'), 0.5, {
-                    y: 0,
-                    autoAlpha: 1,
+                TweenMax.to($('.project.hidden'), 0.4, {
+                    webkitFilter:"blur(0px)",
                     ease: Power1.easeOut,
                 });
                 $targets = $('.project:not([data-filter="' + filter + '"])').addClass('hidden');
-                TweenMax.to($targets, 0.5, {
-                    y: height,
-                    rotation: 0,
-                    autoAlpha: 0,
-                    ease: Power1.easeIn,
+                TweenMax.to($targets, 0.4, {
+                    webkitFilter:"blur(30px)",
+                    ease: Power1.easeOut,
                 });
             }
         },
@@ -154,7 +150,7 @@ $(function() {
             });
         },
         scrollEffect: function() {
-            var ySpeed = ['0%','0%','0%','-70%','50%','100%','-100%'];
+            var ySpeed = ['0%','0%','0%','-100%','50%','100%','-130%'];
             var controller = new ScrollMagic.Controller({
                 globalSceneOptions: {
                     triggerHook: 'onLeave'
@@ -194,7 +190,7 @@ $(function() {
 
             var projects = document.querySelectorAll(".project-img");
             for (var i = 0; i < projects.length; i++) {
-                TweenLite.to(projects[i], 0, {width: rand(50, 70)+"%", yPercent: rand(0, 50), xPercent: rand(0, 50), rotation: rand(-10, 10)});
+                TweenLite.to(projects[i], 0, {width: rand(60, 80)+"%", yPercent: rand(0, 50), xPercent: rand(0, 50), rotation: rand(-10, 10)});
                 new ScrollMagic.Scene({
                     triggerElement: projects[i],
                     duration: rand(100,300)+"%"

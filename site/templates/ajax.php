@@ -19,7 +19,7 @@ if(kirby()->request()->ajax()) {
 				<div class="subtitle">
 					<?php echo $page->subtitle()->kt() ?>
 				</div>
-				<div class="page_content">
+				<div class="about_content">
 					<?php echo $page->description()->kt() ?>
 				</div>
 				<div class="page_link">
