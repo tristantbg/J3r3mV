@@ -96,7 +96,7 @@ $(function() {
                 // $(document).keyup(function(e) {
                 //     if (e.keyCode === 39 && $slider) app.goNext($slider);
                 // });
-                if (Modernizr.touch) {
+                if (width <= 900) {
                     app.mobileMenu();
                 } else {
                     app.scrollEffect();
