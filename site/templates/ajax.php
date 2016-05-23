@@ -10,6 +10,10 @@ if(kirby()->request()->ajax()) {
 
 	<div id="about-page">
 
+		<div class="back-btn">
+			Back
+		</div>
+
 		<div class="left">
 			<?php echo $site->title()->html() ?>
 		</div>
@@ -27,7 +31,7 @@ if(kirby()->request()->ajax()) {
 				</div>
 			</div>
 			<div class="clients">
-				Clients in Magazines include&nbsp;:
+				<?php echo $page->clientstitle()->html() ?>
 				<div class="clients_content">
 					<?php echo $page->clients()->kt() ?>
 				</div>
@@ -41,6 +45,10 @@ if(kirby()->request()->ajax()) {
 
 
 <?php else: ?>
+
+		<div class="back-btn">
+			Back
+		</div>
 
 	<h1 class="page_title"><?php echo $page->title()->html(); if (!$page->date() == null): echo ', '.$page->date('Y'); endif ?></h1>
 

@@ -6,6 +6,7 @@
 $desktop = 1100px
 $tablet = 900px
 $padding = 30px
+$paddingmobile = 20px
 
 $primary ?= #FFF
 $font ?= 'Helvetica'
@@ -57,6 +58,13 @@ a, a:hover, a:visited, a:focus
 [data-target], [data-target]:visited, [data-target]:hover, [data-target]:focus
 	font-family $font
 
+[data-target]
+	transition(letter-spacing,300ms)
+	letter-spacing 0
+
+[data-target]:hover
+	letter-spacing .1em
+
 .columns
 	margin-right -2rem
 	
@@ -104,10 +112,12 @@ header#main_menu
 	z-index 1000
 	-webkit-backface-visibility hidden
 	backface-visibility hidden
+	+below($tablet)
+		display none
 	ul .category
+		cursor pointer
 		transition(letter-spacing,300ms)
 		letter-spacing 0
-		cursor pointer
 	ul .category:hover, ul .category.active
 		letter-spacing .1em
 
@@ -129,6 +139,9 @@ header#main_menu
 	z-index 1000
 	-webkit-backface-visibility hidden
 	backface-visibility hidden
+	+below($tablet)
+		top $paddingmobile
+		left $paddingmobile
 
 #main_title
 	transition(width)
@@ -143,9 +156,15 @@ header#main_menu
 	text-transform none
 	-webkit-backface-visibility hidden
 	backface-visibility hidden
+	+below($tablet)
+		position absolute
 	h1
 		transition(font-size)
 		font-size 7vw
+		z-index 8000
+		cursor pointer
+		+below($tablet)
+			font-size 14vw
 
 .projects
 	transition(width)
@@ -154,7 +173,8 @@ header#main_menu
 	//justify-content space-between
 	//flex-wrap wrap
 	min-height 200vh
-	margin-bottom 50vh
+	+above($tablet)
+		margin-bottom 50vh
 	.offset
 		height 100vh
 		width 100%
@@ -165,28 +185,51 @@ header#main_menu
 		pointer-events none
 		flexbox()
 		align-items center
-	.project
-		// position absolute
-		// top 0
-		// left 0
-		// vendor(transform-style, preserve-3d)
-		// transform-origin center
-		// display inline-block
-		position relative
-		float left
-		width 25%
-		height 25vw
-		transform-origin center
-		vendor(filter,blur(0px))
-		-webkit-backface-visibility hidden
-		backface-visibility hidden
-		img
-			position absolute
-			width 50%
-			height auto
-			top 50%
-			left 50%
-			transform(translate(-50%,-50%))
+		+below($desktop)
+			display none
+	.wrap
+		.project
+			pointer-events none
+			position relative
+			float left
+			width 25%
+			height 25vw
+			transform-origin center
+			vendor(filter,blur(0px))
+			-webkit-backface-visibility hidden
+			backface-visibility hidden
+			+below($tablet)
+				width 100%
+				height auto
+				padding $paddingmobile
+			a
+				pointer-events auto
+			.project-img
+				pointer-events auto
+				//transition(background)
+				background transparent
+				position absolute
+				width 50%
+				height auto
+				top 50%
+				left 50%
+				transform(translate(-50%,-50%))
+				+below($tablet)
+					position initial
+					width 100%
+					transform(none)
+			img
+				//transition(opacity)
+				opacity 1
+		.project.hidden
+			a
+				cursor default
+		.project.active
+			+above($tablet)
+				.project-img
+					background #000000
+					img
+						opacity 0
 
 .content
 	transition(left)
@@ -197,9 +240,20 @@ header#main_menu
 	overflow-y scroll
 	z-index 1000
 	background $primary
+	+below($tablet)
+		span(1)
+	.back-btn
+		position fixed
+		bottom $paddingmobile
+		left $paddingmobile
+		z-index 4000
+		+above($tablet)
+			display none
 	.inner
 		padding $padding
 		overflow-y scroll
+		+below($tablet)
+			padding $paddingmobile
 	.page_content
 		text-transform none
 	h1
@@ -214,24 +268,33 @@ header#main_menu
 	content ''
 	background: #000000
 	width 1px
-	height 'calc(100% - %s * 2)' % ($padding)
+	//height 'calc(100% - %s * 2)' % ($padding)
+	height 100%
 	position fixed
-	top $padding
+	//top $padding
+	top 0
 	left 100%
 
 body.page
 	#main_title
-		width 50%
-		h1
-			font-size 6vw
-	.projects
-		span(1/2)
-		.project
+		+above($tablet)
 			width 50%
+			h1
+				font-size 6vw
+	.projects
+		+above($tablet)
+			span(1/2)
+		.project
+			+above($tablet)
+				width 50%
 	.content
 		left 50%
+		+below($tablet)
+			left 0
 	.content::before
 		left 50%
+		+below($tablet)
+			left -1px
 
 #about-page
 	.left, .right

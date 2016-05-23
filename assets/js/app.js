@@ -2,7 +2,6 @@
 var width = $(window).width(),
     height = $(window).height(),
     $slidecontainer, $body, $intro, $mouse_nav;
-
 $(function() {
     var app = {
         init: function() {
@@ -14,6 +13,7 @@ $(function() {
                 app.sizeSet();
             });
             $(document).ready(function($) {
+                $root = "/JeremyVitte";
                 $body = $('body');
                 $intro = $('.intro');
                 $slidecontainer = $('.content .inner');
@@ -44,12 +44,21 @@ $(function() {
                         $body.removeClass('page');
                     }
                 });
-                $('body').on('click', '[data-target]',function(e) {
+                $('body').on('click', '[data-target]', function(e) {
                     $el = $(this);
+                    $parent = $el.parent();
                     e.preventDefault();
-                    History.pushState({
-                        type: 'page'
-                    }, "Jeremy Vitte | " + $el.data('title'), $el.attr('href'));
+                    if (!$parent.hasClass('hidden')) {
+                        $projects.removeClass('active');
+                        if ($parent.is('.project')) {
+                            $parent.addClass('active');
+                        }
+                        History.pushState({
+                            type: 'page'
+                        }, "Jérémy Vitté | " + $el.data('title'), $el.attr('href'));
+                    } else {
+                        app.goIndex();
+                    }
                 });
                 $('.category[data-filter]').bind('click', function(e) {
                     $el = $(this);
@@ -61,32 +70,49 @@ $(function() {
                         filter: filter
                     }, document.getElementsByTagName("title")[0].innerHTML, url + "?filter=" + filter);
                 });
+                $('body').on('click', '.back-btn', function(e) {
+                    e.preventDefault();
+                    app.goIndex();
+                });
                 $('.intro').click(function(event) {
                     $(this).addClass('closed');
                 });
-                $projects.hover(function() {
-                    $mouse_nav.html($(this).data('title'));
+                $('.project [data-target]').hover(function() {
+                    if (!$(this).parent('.project').hasClass('hidden')) {
+                        $mouse_nav.html($(this).data('title'));
+                    }
                 }, function() {
                     $mouse_nav.html('');
                 });
                 //esc
                 $(document).keyup(function(e) {
-                    if (e.keyCode === 27) hasher.setHash('index');
+                    if (e.keyCode === 27) app.goIndex();
                 });
                 //left
-                $(document).keyup(function(e) {
-                    if (e.keyCode === 37 && $slider) app.goPrev($slider);
-                });
-                //right
-                $(document).keyup(function(e) {
-                    if (e.keyCode === 39 && $slider) app.goNext($slider);
-                });
-                app.scrollEffect();
+                // $(document).keyup(function(e) {
+                //     if (e.keyCode === 37 && $slider) app.goPrev($slider);
+                // });
+                // //right
+                // $(document).keyup(function(e) {
+                //     if (e.keyCode === 39 && $slider) app.goNext($slider);
+                // });
                 if (Modernizr.touch) {
                     app.mobileMenu();
                 } else {
+                    app.scrollEffect();
                     app.mouseNav();
-                    app.mouseNav();
+                    $(window).scroll(function(event) {
+                        if ($(window).scrollTop() == 0 && $body.hasClass('page')) {
+                            app.goIndex();
+                        }
+                    });
+                    // $('.offset').click(function(event) {
+                    //     $body.animate({
+                    //       scrollTop: 0},
+                    //       600, function() {
+                    //       $body.removeClass('page');
+                    //     });
+                    // });
                 }
             });
         },
@@ -107,19 +133,20 @@ $(function() {
                 $categories.removeClass('active');
                 $projects.removeClass('hidden');
                 TweenMax.to($projects, 0.4, {
-                    webkitFilter:"blur(0px)",
+                    webkitFilter: "blur(0px)",
                     ease: Power1.easeOut,
                 });
             } else {
                 $categories.removeClass('active');
                 element.addClass('active');
                 TweenMax.to($('.project.hidden'), 0.4, {
-                    webkitFilter:"blur(0px)",
+                    webkitFilter: "blur(0px)",
                     ease: Power1.easeOut,
                 });
+                $projects.removeClass('hidden');
                 $targets = $('.project:not([data-filter="' + filter + '"])').addClass('hidden');
                 TweenMax.to($targets, 0.4, {
-                    webkitFilter:"blur(30px)",
+                    webkitFilter: "blur(30px)",
                     ease: Power1.easeOut,
                 });
             }
@@ -127,10 +154,6 @@ $(function() {
         sizeSet: function() {
             width = $(window).width();
             height = $(window).height();
-            $projects.css({
-              width: width/4,
-              height: width/4
-            });
         },
         mouseNav: function() {
             $(window).mousemove(function(event) {
@@ -150,7 +173,7 @@ $(function() {
             });
         },
         scrollEffect: function() {
-            var ySpeed = ['0%','0%','0%','-100%','50%','100%','-130%'];
+            var ySpeed = ['0%', '0%', '0%', '-100%', '50%', '100%', '-130%'];
             var controller = new ScrollMagic.Controller({
                 globalSceneOptions: {
                     triggerHook: 'onLeave'
@@ -163,8 +186,7 @@ $(function() {
             });
             //var introAnim = TweenMax.fromTo("#main-title", 1, {opacity: "1"}, {opacity: "0"});
             var padding = $('#main_menu').css('left');
-            var introAnim = new TimelineMax()
-            .to("#main_menu", 0, {
+            var introAnim = new TimelineMax().to("#main_menu", 0, {
                 x: "-100%",
                 left: '0'
             }).to("#about", 0, {
@@ -172,11 +194,9 @@ $(function() {
                 left: '0'
             }).to("#main_title", 0.5, {
                 opacity: "1"
-            })
-            .to("#main_title", 0.5, {
+            }).to("#main_title", 0.5, {
                 opacity: "0"
-            })
-            .to("#main_menu", 0.3, {
+            }).to("#main_menu", 0.3, {
                 x: "0%",
                 left: padding
             }, '-=0.3').to("#about", 0.3, {
@@ -187,27 +207,36 @@ $(function() {
                 triggerElement: ".offset",
                 duration: "100%"
             }).setTween(introAnim).addTo(controller);
-
             var projects = document.querySelectorAll(".project-img");
             for (var i = 0; i < projects.length; i++) {
-                TweenLite.to(projects[i], 0, {width: rand(60, 80)+"%", yPercent: rand(0, 50), xPercent: rand(0, 50), rotation: rand(-10, 10)});
+                TweenLite.to(projects[i], 0, {
+                    width: rand(60, 80) + "%",
+                    yPercent: rand(0, 50),
+                    xPercent: rand(0, 50),
+                    rotation: rand(-10, 10)
+                });
                 new ScrollMagic.Scene({
                     triggerElement: projects[i],
-                    duration: rand(100,300)+"%"
+                    duration: rand(100, 300) + "%"
                 }).setTween(projects[i], {
                     yPercent: arrayRand(ySpeed),
                     rotation: rand(-30, 30)
                 }).addTo(parallax);
             }
         },
+        goIndex: function() {
+            History.pushState({
+                type: 'index'
+            }, "Jérémy Vitté", window.location.origin + $root);
+        },
         mobileMenu: function() {
-            $("ul.category .title").click(function(event) {
-                var parent = $(this).parent();
-                if (!parent.hasClass('active')) {
-                    $("ul.category.active").removeClass('active').find('ul.albums').slideToggle(800);
-                    parent.addClass('active').find('ul.albums').slideToggle(800);
-                }
-            });
+            // $("ul.category .title").click(function(event) {
+            //     var parent = $(this).parent();
+            //     if (!parent.hasClass('active')) {
+            //         $("ul.category.active").removeClass('active').find('ul.albums').slideToggle(800);
+            //         parent.addClass('active').find('ul.albums').slideToggle(800);
+            //     }
+            // });
         },
         loadContent: function(url, target) {
             $slidecontainer.scrollTop(0);

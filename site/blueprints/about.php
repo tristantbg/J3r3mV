@@ -15,6 +15,9 @@ fields:
   description:
     label: Content
     type:  textarea
+  clientstitle:
+    label: Clients title
+    type:  text
   clients:
     label: Clients in Magazines
     type:  textarea

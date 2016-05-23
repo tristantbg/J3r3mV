@@ -8,6 +8,10 @@
 
 			<div id="about-page">
 
+				<div class="back-btn">
+					Back
+				</div>
+
 				<div class="left">
 					<?php echo $site->title()->html() ?>
 				</div>
@@ -25,7 +29,7 @@
 						</div>
 					</div>
 					<div class="clients">
-						Clients in Magazines include&nbsp;:
+						<?php echo $page->clientstitle()->html() ?>
 						<div class="clients_content">
 							<?php echo $page->clients()->kt() ?>
 						</div>
@@ -39,6 +43,10 @@
 
 		<?php elseif ($page->content()->name() == "error"): ?>
 
+			<div class="back-btn">
+					Back
+				</div>
+
 			<h1 class="page_title"><?php echo $page->title()->html(); if (!$page->date() == null): echo ', '.$page->date('Y'); endif ?></h1>
 
 			<div class="page_content">
@@ -48,6 +56,10 @@
 			<a href="<?php echo $site->homePage()->url() ?>">Go back</a>
 
 		<?php else: ?>
+
+			<div class="back-btn">
+					Back
+				</div>
 
 			<h1 class="page_title"><?php echo $page->title()->html(); if (!$page->date() == null): echo ', '.$page->date('Y'); endif ?></h1>
 
