@@ -225,6 +225,7 @@ $(function() {
             }
         },
         goIndex: function() {
+            $projects.removeClass('active');
             History.pushState({
                 type: 'index'
             }, "Jérémy Vitté", window.location.origin + $root);
