@@ -154,6 +154,17 @@ $(function() {
         sizeSet: function() {
             width = $(window).width();
             height = $(window).height();
+            if (width >= 900) {
+                $projects.css({
+                    width: width / 4,
+                    height: width / 4
+                });
+            } else {
+              $projects.css({
+                    width: "",
+                    height: ""
+                });
+            }
         },
         mouseNav: function() {
             $(window).mousemove(function(event) {
