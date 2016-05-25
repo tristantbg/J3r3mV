@@ -66,27 +66,29 @@ a, a:hover, a:visited, a:focus
 	letter-spacing .1em
 
 .columns
-	margin-right -2rem
+	span(1)
 	
 .column
-	display inline-block
-	vertical-align top
-	padding-right 2rem
+	col(1)
 	
 .columns-1 .column
-	width 100%
+	col(1)
 	
 .columns-2 .column
-	width 50%
+	col(1/2, cycle:2)
 	
 .columns-3 .column
-	width 33.33%
+	col(1/3, cycle:3)
 	
 .columns-4 .column
-	width 25%
+	col(1/4, cycle:4)
 	
 .columns-5 .column
-	width 20%
+	col(1/5, cycle:5)
+
+.column, .columns-1 .column, .columns-2 .column, .columns-3 .column, .columns-4 .column, .columns-5 .column
+	+below($desktop)
+		stack()
 
 .wrap
 	height 100%
