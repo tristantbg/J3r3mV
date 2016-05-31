@@ -13,7 +13,7 @@ $(function() {
                 app.sizeSet();
             });
             $(document).ready(function($) {
-                $root = "/JeremyVitte";
+                $root = "/jeremyvitte";
                 $body = $('body');
                 $intro = $('.intro');
                 $slidecontainer = $('.content .inner');
@@ -22,7 +22,6 @@ $(function() {
                 $mouse_nav = $('.mouse_nav');
                 app.sizeSet();
                 var hash;
-                $(document).scrollScope();
                 if (app.getParameters('filter')) {
                     var filter = app.getParameters('filter');
                     var element = $('.category[data-filter="' + filter + '"]');
@@ -99,6 +98,7 @@ $(function() {
                 if (width <= 900) {
                     app.mobileMenu();
                 } else {
+                    $(document).scrollScope();
                     app.scrollEffect();
                     app.mouseNav();
                     $(window).scroll(function(event) {
