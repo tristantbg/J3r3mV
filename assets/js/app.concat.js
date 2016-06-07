@@ -1,7 +1,7 @@
 /* globals $:false */
 var width = $(window).width(),
     height = $(window).height(),
-    $slidecontainer, $body, $intro, $mouse_nav, mobile = false;
+    ySpeed, controller, parallax, $slidecontainer, $body, $intro, $mouse_nav, mobile = false;
 $(function() {
     var app = {
         init: function() {
@@ -81,12 +81,11 @@ $(function() {
                     $mouse_nav.html('');
                 });
                 $('.wrap').click(function(e) {
-                  if ($(e.target).is('.wrap')) {
-                    app.goIndex();
-                  }
-                  else {
-                    return;
-                  }
+                    if ($(e.target).is('.wrap')) {
+                        app.goIndex();
+                    } else {
+                        return;
+                    }
                 });
                 //esc
                 $(document).keyup(function(e) {
@@ -109,11 +108,11 @@ $(function() {
                             app.goIndex();
                         }
                     });
-                  $('.offset').click(function(event) {
-                      $body.animate({
-                        scrollTop: height/3},
-                        1000);
-                  });
+                    $('.offset').click(function(event) {
+                        $body.animate({
+                            scrollTop: height / 3
+                        }, 1000);
+                    });
                 }
             });
         },
@@ -161,11 +160,11 @@ $(function() {
                     height: width / 4
                 });
                 if (mobile) {
-                  location.reload();
+                    location.reload();
                 }
             } else {
-              mobile = true;
-              $projects.css({
+                mobile = true;
+                $projects.css({
                     width: "",
                     height: ""
                 });
@@ -189,13 +188,13 @@ $(function() {
             });
         },
         scrollEffect: function() {
-            var ySpeed = ['0%', '0%', '0%', '-100%', '50%', '100%', '-130%'];
-            var controller = new ScrollMagic.Controller({
+            ySpeed = ['0%', '0%', '0%', '-100%', '50%', '100%', '-130%'];
+            controller = new ScrollMagic.Controller({
                 globalSceneOptions: {
                     triggerHook: 'onLeave'
                 }
             });
-            var parallax = new ScrollMagic.Controller({
+            parallax = new ScrollMagic.Controller({
                 globalSceneOptions: {
                     triggerHook: 'onEnter'
                 }
@@ -223,22 +222,35 @@ $(function() {
                 triggerElement: ".offset",
                 duration: "100%"
             }).setTween(introAnim).addTo(controller);
-            var projects = document.querySelectorAll(".project-img");
-            for (var i = 0; i < projects.length; i++) {
-                TweenLite.to(projects[i], 0, {
-                    width: rand(60, 80) + "%",
-                    yPercent: rand(0, 50),
-                    xPercent: rand(0, 50),
-                    rotation: rand(-10, 10)
-                });
-                new ScrollMagic.Scene({
-                    triggerElement: projects[i],
-                    duration: rand(100, 300) + "%"
-                }).setTween(projects[i], {
-                    yPercent: arrayRand(ySpeed),
-                    rotation: rand(-30, 30)
-                }).addTo(parallax);
+            var $projectsRegular = document.querySelectorAll(".regular");
+            var $projectsImportant = document.querySelectorAll(".important");
+            for (var i = 0; i < $projectsRegular.length; i++) {
+                app.defineScrollElem($projectsRegular[i], false);
             }
+            for (var i = 0; i < $projectsImportant.length; i++) {
+                app.defineScrollElem($projectsImportant[i], true);
+            }
+        },
+        defineScrollElem: function(elem, important) {
+            var elemW;
+            if (important) {
+                elemW = rand(85, 96) + "%";
+            } else {
+                elemW = rand(50, 70) + "%";
+            }
+            TweenLite.to(elem, 0, {
+                width: elemW,
+                yPercent: rand(0, 50),
+                xPercent: rand(-40, 40),
+                rotation: rand(-10, 10)
+            });
+            new ScrollMagic.Scene({
+                triggerElement: elem,
+                duration: rand(100, 300) + "%"
+            }).setTween(elem, {
+                yPercent: arrayRand(ySpeed),
+                rotation: rand(-30, 30)
+            }).addTo(parallax);
         },
         goIndex: function() {
             $projects.removeClass('active');
