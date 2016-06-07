@@ -157,7 +157,7 @@ $(function() {
             if (width >= 900) {
                 $projects.css({
                     width: width / 4,
-                    height: width / 4
+                    height: width / 3
                 });
                 if (mobile) {
                     location.reload();
@@ -234,14 +234,15 @@ $(function() {
         defineScrollElem: function(elem, important) {
             var elemW;
             if (important) {
-                elemW = rand(85, 96) + "%";
+                elemW = rand(85, 96);
             } else {
-                elemW = rand(50, 70) + "%";
+                elemW = rand(60, 75);
             }
+            var spaceAround = 50 - (elemW / 2);
             TweenLite.to(elem, 0, {
-                width: elemW,
+                width: elemW + "%",
                 yPercent: rand(0, 50),
-                xPercent: rand(-40, 40),
+                xPercent: rand(-spaceAround, spaceAround),
                 rotation: rand(-10, 10)
             });
             new ScrollMagic.Scene({
