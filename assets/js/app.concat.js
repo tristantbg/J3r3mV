@@ -1,7 +1,7 @@
 /* globals $:false */
 var width = $(window).width(),
     height = $(window).height(),
-    $slidecontainer, $body, $intro, $mouse_nav;
+    $slidecontainer, $body, $intro, $mouse_nav, mobile = false;
 $(function() {
     var app = {
         init: function() {
@@ -73,15 +73,20 @@ $(function() {
                     e.preventDefault();
                     app.goIndex();
                 });
-                $('.intro').click(function(event) {
-                    $(this).addClass('closed');
-                });
                 $('.project [data-target]').hover(function() {
                     if (!$(this).parent('.project').hasClass('hidden')) {
                         $mouse_nav.html($(this).data('title'));
                     }
                 }, function() {
                     $mouse_nav.html('');
+                });
+                $('.wrap').click(function(e) {
+                  if ($(e.target).is('.wrap')) {
+                    app.goIndex();
+                  }
+                  else {
+                    return;
+                  }
                 });
                 //esc
                 $(document).keyup(function(e) {
@@ -95,9 +100,7 @@ $(function() {
                 // $(document).keyup(function(e) {
                 //     if (e.keyCode === 39 && $slider) app.goNext($slider);
                 // });
-                if (width <= 900) {
-                    app.mobileMenu();
-                } else {
+                if (width >= 900) {
                     $(document).scrollScope();
                     app.scrollEffect();
                     app.mouseNav();
@@ -106,13 +109,11 @@ $(function() {
                             app.goIndex();
                         }
                     });
-                    // $('.offset').click(function(event) {
-                    //     $body.animate({
-                    //       scrollTop: 0},
-                    //       600, function() {
-                    //       $body.removeClass('page');
-                    //     });
-                    // });
+                  $('.offset').click(function(event) {
+                      $body.animate({
+                        scrollTop: height/3},
+                        1000);
+                  });
                 }
             });
         },
@@ -159,7 +160,11 @@ $(function() {
                     width: width / 4,
                     height: width / 4
                 });
+                if (mobile) {
+                  location.reload();
+                }
             } else {
+              mobile = true;
               $projects.css({
                     width: "",
                     height: ""

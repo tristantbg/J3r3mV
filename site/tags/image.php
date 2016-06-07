@@ -45,7 +45,7 @@ kirbytext::$tags['image'] = array(
     }
 
     // at least some accessibility for the image
-    if(empty($alt)) $alt = ' ';
+    if(empty($alt)) $alt = $tag->page()->title()->html().' — © '.$tag->page()->date("Y").', '.site()->title()->html();
 
     // link builder
     $_link = function($image) use($tag, $url, $link, $file) {
@@ -83,7 +83,7 @@ kirbytext::$tags['image'] = array(
       	'src' => resizeOnDemand($file, 300),
         'width'  => '100%',
         'height' => 'auto',
-        'class'  => 'lazyload',
+        'class'  => 'lazyimg lazyload',
         'srcset' => 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
         'data-srcset' => $srcset,
         'data-sizes'  => 'auto',
@@ -94,7 +94,7 @@ kirbytext::$tags['image'] = array(
     };
 
       $class = trim($tag->attr('class') . ' ' . $tag->attr('imgclass'));
-      return $_link($_image($class));
+      return $_link($_image($class)).'<noscript><img src="'.resizeOnDemand($file, 900).'" alt="'.$alt.'" width="100%" height="auto"></noscript>';
 
   }
 );

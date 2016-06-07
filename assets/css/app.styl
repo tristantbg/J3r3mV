@@ -107,6 +107,15 @@ a, a:hover, a:visited, a:focus
 .container
 	height 100%
 
+img.lazyimg
+	transition()
+
+img.lazyimg
+	opacity 0
+
+img.lazyimg.lazyloaded
+	opacity 1
+
 header#main_menu
 	position fixed
 	bottom $padding
@@ -122,17 +131,6 @@ header#main_menu
 		letter-spacing 0
 	ul .category:hover, ul .category.active
 		letter-spacing .1em
-
-.lazyload, .lazyloaded
-	transition()
-
-.lazyload
-	opacity 0.3
-	vendor(filter, blur(5px))
-
-.lazyloaded
-	opacity 1
-	vendor(filter, blur(0px))
 
 #about
 	position fixed
@@ -180,6 +178,7 @@ header#main_menu
 	.offset
 		height 100vh
 		width 100%
+		cursor pointer
 	.mouse_nav
 		position absolute
 		height 100px
@@ -220,9 +219,6 @@ header#main_menu
 					position initial
 					width 100%
 					transform(none)
-			img
-				//transition(opacity)
-				opacity 1
 		.project.hidden
 			a
 				cursor default
@@ -257,14 +253,29 @@ header#main_menu
 		overflow-y scroll
 		+below($tablet)
 			padding $paddingmobile
+	.page_title
+		position fixed
+		top $padding
+		left 'calc(50% + %s)' % ($padding)
+		z-index 4000
+		+below($tablet)
+			top $paddingmobile
+			left $paddingmobile
 	.page_content
 		text-transform none
+		margin-top ($padding * 2)
 	h1
 		text-transform uppercase
 	h1, p, img
 		margin-bottom $padding
 	img
 		width 100%
+	img.lazyimg
+		opacity 0.3
+		vendor(filter, blur(5px))
+	img.lazyimg.lazyloaded
+		opacity 1
+		vendor(filter, blur(0px))
 		
 .content::before
 	transition(left)
