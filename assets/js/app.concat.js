@@ -27,8 +27,8 @@ $(function() {
                     var element = $('.category[data-filter="' + filter + '"]');
                     app.filter(filter, element);
                 }
-                History.Adapter.bind(window, 'statechange', function() { // Note: We are using statechange instead of popstate
-                    var State = History.getState(); // Note: We are using History.getState() instead of event.state
+                History.Adapter.bind(window, 'statechange', function() { 
+                    var State = History.getState();
                     console.log(State);
                     var content = State.data;
                     if (content.type == 'page') {
@@ -124,7 +124,7 @@ $(function() {
                     });
                     $('.offset').click(function(event) {
                         $body.animate({
-                            scrollTop: height / 3
+                            scrollTop: height/2
                         }, 1000);
                     });
                 }
