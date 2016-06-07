@@ -225,20 +225,20 @@ $(function() {
             var $projectsRegular = document.querySelectorAll(".regular");
             var $projectsImportant = document.querySelectorAll(".important");
             for (var i = 0; i < $projectsRegular.length; i++) {
-                app.defineScrollElem($projectsRegular[i], false);
+                app.placeElem($projectsRegular[i], false);
             }
             for (var i = 0; i < $projectsImportant.length; i++) {
-                app.defineScrollElem($projectsImportant[i], true);
+                app.placeElem($projectsImportant[i], true);
             }
         },
-        defineScrollElem: function(elem, important) {
+        placeElem: function(elem, important) {
             var elemW;
             if (important) {
                 elemW = rand(85, 96);
             } else {
                 elemW = rand(60, 75);
             }
-            var spaceAround = 50 - (elemW / 2);
+            var spaceAround = 50 - (elemW / 2) + 5;
             TweenLite.to(elem, 0, {
                 width: elemW + "%",
                 yPercent: rand(0, 50),
