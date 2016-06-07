@@ -107,6 +107,23 @@ a, a:hover, a:visited, a:focus
 .container
 	height 100%
 
+.overlay
+	transition(opacity)
+	visibility visible
+	width 50%
+	height 100%
+	position fixed
+	background $primary
+	opacity 0.9
+	top 0
+	left 0
+	z-index 20000
+	cursor pointer
+
+.overlay.hidden
+	opacity 0
+	visibility hidden
+
 img.lazyimg
 	transition()
 

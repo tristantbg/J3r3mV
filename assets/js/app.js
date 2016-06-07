@@ -35,18 +35,32 @@ $(function() {
                         $slidecontainer.fadeOut(300, function() {
                             app.loadContent(State.url + '/ajax', $slidecontainer);
                         });
-                    } else if (content.type == 'filter') {
+                        $('.overlay').addClass('hidden');
+                    } else if (content.type == 'drawings') {
+                        $slidecontainer.fadeOut(300, function() {
+                            app.loadContent(State.url + '/ajax', $slidecontainer);
+                        });
+                        $('.overlay').removeClass('hidden');
+                    }
+                    else if (content.type == 'filter') {
                         var filter = content.filter;
                         var element = $('.category[data-filter="' + filter + '"]');
                         app.filter(filter, element);
                     } else {
                         $body.removeClass('page');
+                        $('.overlay').addClass('hidden');
                     }
                 });
                 $('body').on('click', '[data-target]', function(e) {
                     $el = $(this);
                     $parent = $el.parent();
                     e.preventDefault();
+                    if ($el.data('target') == "drawings") {
+                      History.pushState({
+                            type: 'drawings'
+                        }, "Jérémy Vitté | " + $el.data('title'), $el.attr('href'));
+                      return;
+                    }
                     if (!$parent.hasClass('hidden')) {
                         $projects.removeClass('active');
                         if ($parent.is('.project')) {
@@ -69,7 +83,7 @@ $(function() {
                         filter: filter
                     }, document.getElementsByTagName("title")[0].innerHTML, url + "?filter=" + filter);
                 });
-                $('body').on('click', '.back-btn', function(e) {
+                $('body').on('click', '.back-btn, .overlay', function(e) {
                     e.preventDefault();
                     app.goIndex();
                 });

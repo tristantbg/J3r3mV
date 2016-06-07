@@ -24,7 +24,7 @@ $projects = $pages->find('work')->index()->filterBy('template', 'project')->visi
 		  srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
 		  data-srcset="<?php echo $srcset ?>" 
 		  data-sizes="auto" 
-		  data-optimumx="1.5" 
+		  data-optimumx="1" 
 		  class="lazyimg lazyload"
 		  alt="<?php echo $project->title()->html().' — © '.$project->date("Y").', '.$site->title(); ?>" 
 		  width="100%" height="auto">
