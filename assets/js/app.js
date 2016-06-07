@@ -238,11 +238,11 @@ $(function() {
             } else {
                 elemW = rand(60, 75);
             }
-            var spaceAround = 50 - (elemW / 2) + 5;
+            var spaceAround = 50 - (elemW / 2);
             TweenLite.to(elem, 0, {
                 width: elemW + "%",
                 yPercent: rand(0, 50),
-                xPercent: rand(-spaceAround, spaceAround),
+                xPercent: rand(-spaceAround-5, spaceAround+5),
                 rotation: rand(-10, 10)
             });
             new ScrollMagic.Scene({
