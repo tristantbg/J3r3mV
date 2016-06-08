@@ -27,7 +27,7 @@ $(function() {
                     var element = $('.category[data-filter="' + filter + '"]');
                     app.filter(filter, element);
                 }
-                History.Adapter.bind(window, 'statechange', function() { 
+                History.Adapter.bind(window, 'statechange', function() {
                     var State = History.getState();
                     console.log(State);
                     var content = State.data;
@@ -41,8 +41,7 @@ $(function() {
                             app.loadContent(State.url + '/ajax', $slidecontainer);
                         });
                         $('.overlay').removeClass('hidden');
-                    }
-                    else if (content.type == 'filter') {
+                    } else if (content.type == 'filter') {
                         var filter = content.filter;
                         var element = $('.category[data-filter="' + filter + '"]');
                         app.filter(filter, element);
@@ -52,44 +51,52 @@ $(function() {
                     }
                 });
                 $('body').on('click', '[data-target]', function(e) {
-                    $el = $(this);
-                    $parent = $el.parent();
-                    e.preventDefault();
-                    if ($el.data('target') == "drawings") {
-                      History.pushState({
-                            type: 'drawings'
-                        }, "Jérémy Vitté | " + $el.data('title'), $el.attr('href'));
-                      return;
-                    }
-                    if (!$parent.hasClass('hidden')) {
-                        $projects.removeClass('active');
-                        if ($parent.is('.project')) {
-                            $parent.addClass('active');
+                    if (width >= 900) {
+                        $el = $(this);
+                        $parent = $el.parent();
+                        e.preventDefault();
+                        if ($el.data('target') == "drawings") {
+                            History.pushState({
+                                type: 'drawings'
+                            }, "Jérémy Vitté | " + $el.data('title'), $el.attr('href'));
+                            return;
                         }
-                        History.pushState({
-                            type: 'page'
-                        }, "Jérémy Vitté | " + $el.data('title'), $el.attr('href'));
-                    } else {
-                        app.goIndex();
+                        if (!$parent.hasClass('hidden')) {
+                            $projects.removeClass('active');
+                            if ($parent.is('.project')) {
+                                $parent.addClass('active');
+                            }
+                            History.pushState({
+                                type: 'page'
+                            }, "Jérémy Vitté | " + $el.data('title'), $el.attr('href'));
+                        } else {
+                            app.goIndex();
+                        }
                     }
                 });
                 $('.category[data-filter]').bind('click', function(e) {
-                    $el = $(this);
-                    var url = window.location.href.split(/[?#]/)[0];
-                    var filter = $el.data('filter');
-                    e.preventDefault();
-                    History.pushState({
-                        type: 'filter',
-                        filter: filter
-                    }, document.getElementsByTagName("title")[0].innerHTML, url + "?filter=" + filter);
+                    if (width >= 900) {
+                        $el = $(this);
+                        var url = window.location.href.split(/[?#]/)[0];
+                        var filter = $el.data('filter');
+                        e.preventDefault();
+                        History.pushState({
+                            type: 'filter',
+                            filter: filter
+                        }, document.getElementsByTagName("title")[0].innerHTML, url + "?filter=" + filter);
+                    }
                 });
                 $('body').on('click', '.back-btn, .overlay', function(e) {
-                    e.preventDefault();
-                    app.goIndex();
+                    if (width >= 900) {
+                        e.preventDefault();
+                        app.goIndex();
+                    }
                 });
                 $('.project [data-target]').hover(function() {
-                    if (!$(this).parent('.project').hasClass('hidden')) {
-                        $mouse_nav.html($(this).data('title'));
+                    if (width >= 900) {
+                        if (!$(this).parent('.project').hasClass('hidden')) {
+                            $mouse_nav.html($(this).data('title'));
+                        }
                     }
                 }, function() {
                     $mouse_nav.html('');
@@ -124,7 +131,7 @@ $(function() {
                     });
                     $('.offset').click(function(event) {
                         $body.animate({
-                            scrollTop: height/2
+                            scrollTop: height / 2
                         }, 1000);
                     });
                 }
@@ -256,7 +263,7 @@ $(function() {
             TweenLite.to(elem, 0, {
                 width: elemW + "%",
                 yPercent: rand(0, 50),
-                xPercent: rand(-spaceAround-5, spaceAround+5),
+                xPercent: rand(-spaceAround - 5, spaceAround + 5),
                 rotation: rand(-10, 10)
             });
             new ScrollMagic.Scene({

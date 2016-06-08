@@ -308,13 +308,20 @@ header#main_menu
 	left 100%
 
 body.page
+	#about, .overlay
+		+below($tablet)
+			display none
 	#main_title
+		display none
 		+above($tablet)
+			display block
 			width 50%
 			h1
 				font-size 6vw
 	.projects
+		display none
 		+above($tablet)
+			display block
 			span(1/2)
 		.project
 			+above($tablet)
@@ -322,7 +329,9 @@ body.page
 	.content
 		left 50%
 		+below($tablet)
+			position initial
 			left 0
+			height auto
 	.content::before
 		left 50%
 		+below($tablet)

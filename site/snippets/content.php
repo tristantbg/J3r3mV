@@ -10,7 +10,7 @@
 			<div id="about-page">
 
 				<div class="back-btn">
-					Back
+					<a href="<?php echo $site->homePage()->url()?>" data-target="index">Back</a>
 				</div>
 
 				<div class="left">
@@ -45,7 +45,7 @@
 		<?php elseif ($page->content()->name() == "error"): ?>
 
 			<div class="back-btn">
-					Back
+					<a href="<?php echo $site->homePage()->url()?>" data-target="index">Back</a>
 				</div>
 
 			<h1 class="page_title"><?php echo $page->title()->html(); if ($page->date() != null && $page->showdate() != "0"): echo ', '.$page->date('Y'); endif ?></h1>
@@ -59,7 +59,7 @@
 		<?php else: ?>
 
 			<div class="back-btn">
-					Back
+					<a href="<?php echo $site->homePage()->url()?>" data-target="index">Back</a>
 				</div>
 
 			<h1 class="page_title"><?php echo $page->title()->html(); if ($page->date() != null && $page->showdate() != "0"): echo ', '.$page->date('Y'); endif ?></h1>
