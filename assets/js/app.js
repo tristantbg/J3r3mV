@@ -262,7 +262,7 @@ $(function() {
                 ySpeed = rand(-50,150) + '%';
             } else {
                 elemW = rand(60, 75);
-                ySpeed = rand(-150,120) + '%';
+                ySpeed = rand(-100,150) + '%';
             }
             var spaceAround = 100 - elemW;
             TweenLite.to(elem, 0, {
