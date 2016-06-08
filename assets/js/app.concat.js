@@ -268,7 +268,7 @@ $(function() {
             });
             new ScrollMagic.Scene({
                 triggerElement: elem,
-                duration: rand(100, 300) + "%"
+                duration: rand(1, 3) * height + "px"
             }).setTween(elem, {
                 yPercent: arrayRand(ySpeed),
                 rotation: rand(-30, 30)
