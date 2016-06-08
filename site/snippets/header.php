@@ -26,8 +26,14 @@
     <?php endif ?>
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<?php echo html($page->url()) ?>" />
-    <?php if(!$site->ogimage()->empty()): ?>
-	<meta property="og:image" content="<?= $site->ogimage()->toFile()->width(1200)->url() ?>"/>
+    <?php if($page->content()->name() == "project"): ?>
+		<?php if($page->featured() != null): ?>
+			<meta property="og:image" content="<?= resizeOnDemand($page->featured()->toFile(), 1200) ?>"/>
+		<?php endif ?>
+	<?php else: ?>
+		<?php if(!$site->ogimage()->empty()): ?>
+			<meta property="og:image" content="<?= $site->ogimage()->toFile()->width(1200)->url() ?>"/>
+		<?php endif ?>
 	<?php endif ?>
 	<meta property="og:description" content="<?php echo $site->description()->html() ?>" />
 	<?php if($page->isHomepage()): ?>
