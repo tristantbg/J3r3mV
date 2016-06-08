@@ -55,6 +55,10 @@ $(function() {
                         $el = $(this);
                         $parent = $el.parent();
                         e.preventDefault();
+                        if ($el.data('target') == "index") {
+                            app.goIndex();
+                            return;
+                        }
                         if ($el.data('target') == "drawings") {
                             History.pushState({
                                 type: 'drawings'
@@ -209,7 +213,6 @@ $(function() {
             });
         },
         scrollEffect: function() {
-            ySpeed = ['0%', '0%', '0%', '-100%', '50%', '100%', '-130%'];
             controller = new ScrollMagic.Controller({
                 globalSceneOptions: {
                     triggerHook: 'onLeave'
@@ -256,21 +259,23 @@ $(function() {
             var elemW;
             if (important) {
                 elemW = rand(85, 96);
+                ySpeed = rand(-50,150) + '%';
             } else {
                 elemW = rand(60, 75);
+                ySpeed = rand(-150,120) + '%';
             }
-            var spaceAround = 50 - (elemW / 2);
+            var spaceAround = 100 - elemW;
             TweenLite.to(elem, 0, {
                 width: elemW + "%",
-                yPercent: rand(0, 50),
-                xPercent: rand(-spaceAround - 5, spaceAround + 5),
+                y: rand(0, 100) + "%",
+                x: rand(0, spaceAround) + "%",
                 rotation: rand(-10, 10)
             });
             new ScrollMagic.Scene({
                 triggerElement: elem,
-                duration: rand(1, 3) * height + "px"
+                duration: rand(2, 4) * height + "px"
             }).setTween(elem, {
-                yPercent: arrayRand(ySpeed),
+                y: ySpeed,
                 rotation: rand(-30, 30)
             }).addTo(parallax);
         },

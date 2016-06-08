@@ -9,12 +9,13 @@ $padding = 30px
 $paddingmobile = 20px
 
 $primary ?= #FFF
-$font ?= 'Helvetica', 'Arial', sans-serif
+$font ?= 'H', 'Helvetica', 'Arial', sans-serif
 
 // CSS Reset
 global-reset()
-//edit()
+edit()
 
+webfont('H', 'H', true, 'normal')
 webfont('AG', 'AG', true, 'normal')
 
 boxsizing()
@@ -58,12 +59,15 @@ a, a:hover, a:visited, a:focus
 [data-target], [data-target]:visited, [data-target]:hover, [data-target]:focus
 	font-family $font
 
-[data-target]
-	transition(letter-spacing,300ms)
-	letter-spacing 0
+//[data-target]
+	//transition(letter-spacing,300ms)
+	//letter-spacing 0
 
-[data-target]:hover
-	letter-spacing .1em
+//[data-target]:hover
+	//letter-spacing .1em
+	// background url("../images/dot.png") no-repeat left 40%
+	// background-size 5px
+	// padding-left 10px
 
 .columns
 	span(1)
@@ -115,11 +119,15 @@ a, a:hover, a:visited, a:focus
 	height 100%
 	position fixed
 	background $primary
-	opacity 0.9
 	top 0
 	left 0
 	z-index 1000
 	cursor pointer
+	.back-btn
+		position fixed
+		top $padding
+		left $padding
+		z-index 4000
 
 .overlay.hidden
 	opacity 0
@@ -145,10 +153,13 @@ header#main_menu
 		display none
 	ul .category
 		cursor pointer
-		transition(letter-spacing,300ms)
-		letter-spacing 0
+		//transition(letter-spacing,300ms)
+		//letter-spacing 0
 	ul .category:hover, ul .category.active
-		letter-spacing .1em
+		//letter-spacing .1em
+		background url("../images/dot.png") no-repeat left 40%
+		background-size 5px
+		padding-left 10px
 
 #about
 	position fixed
@@ -230,9 +241,6 @@ header#main_menu
 				position absolute
 				width 50%
 				height auto
-				top 50%
-				left 50%
-				transform(translate(-50%,-50%))
 				+below($tablet)
 					position initial
 					width 100%
