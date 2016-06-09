@@ -155,11 +155,15 @@ header#main_menu
 		cursor pointer
 		//transition(letter-spacing,300ms)
 		//letter-spacing 0
-	ul .category:hover, ul .category.active
+	ul .category:hover::after, ul .category.active::after
 		//letter-spacing .1em
-		background url("../images/dot.png") no-repeat left 40%
+		content ''
+		display inline-block
+		width 10px
+		height 10px
+		background url("../images/dot.png") no-repeat right 47%
 		background-size 5px
-		padding-left 10px
+		//padding-left 10px
 
 #about
 	position fixed
