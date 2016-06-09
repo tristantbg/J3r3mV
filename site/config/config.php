@@ -51,9 +51,3 @@ c::set('routes', array(
         }
     )
 ));
-
-// Preload thumbnails
-kirby()->hook('panel.file.upload', function($file) { 
-  $file->height(site()->thumbmin()->value());
-  $file->height(site()->thumbmax()->value());
-});
