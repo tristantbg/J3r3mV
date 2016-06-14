@@ -260,7 +260,7 @@ $(function() {
             var elemW;
             if (important) {
                 elemW = rand(85, 96);
-                ySpeed = rand(-50,250) + '%';
+                ySpeed = rand(-50,230) + '%';
             } else {
                 elemW = rand(60, 75);
                 ySpeed = rand(-100,120) + '%';
@@ -285,15 +285,6 @@ $(function() {
             History.pushState({
                 type: 'index'
             }, "Jérémy Vitté", window.location.origin + $root);
-        },
-        mobileMenu: function() {
-            // $("ul.category .title").click(function(event) {
-            //     var parent = $(this).parent();
-            //     if (!parent.hasClass('active')) {
-            //         $("ul.category.active").removeClass('active').find('ul.albums').slideToggle(800);
-            //         parent.addClass('active').find('ul.albums').slideToggle(800);
-            //     }
-            // });
         },
         loadContent: function(url, target) {
             $slidecontainer.scrollTop(0);
