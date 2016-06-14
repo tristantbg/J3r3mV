@@ -13,7 +13,7 @@ $(function() {
                 app.sizeSet();
             });
             $(document).ready(function($) {
-                $root = "/jeremyvitte";
+                $root = "/";
                 $body = $('body');
                 $intro = $('.intro');
                 $slidecontainer = $('.content .inner');
@@ -180,9 +180,10 @@ $(function() {
             width = $(window).width();
             height = $(window).height();
             if (width >= 900) {
+                s = width / 4;
                 $projects.css({
-                    width: width / 4,
-                    height: width / 3
+                    width: s,
+                    height: s
                 });
                 if (mobile) {
                     location.reload();

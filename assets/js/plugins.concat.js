@@ -1,4 +1,4 @@
-$(function(){$(".oembed-video .thumb, .oembed-video .play").click(function(){var t=$(this).parent(),e=t.find("iframe, object");e.attr("src",e.attr("data-src")),e.css({display:"block"}),t.find(".play, .thumb").remove()})});
+var pluginOembedLoadLazyVideo=function(){var e=this.parentNode,n=e.children[0];n.src=n.dataset.src,this.remove()};document.addEventListener("DOMContentLoaded",function(e){for(var n=document.getElementsByClassName("kirby-plugin-oembed__thumb"),t=0;t<n.length;t++)n[t].addEventListener("click",pluginOembedLoadLazyVideo,!1)});
 /*! scroll-scope.js 0.1.0, MIT
  https://github.com/Eiskis/scroll-scope
 */

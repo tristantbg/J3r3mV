@@ -1,7 +1,6 @@
 @import 'nib'
 @import '../../node_modules/jeet/stylus/jeet'
 @import '_mixins.styl'
-@import './vendor/flickity.min.css'
 
 $desktop = 1100px
 $tablet = 900px
@@ -228,6 +227,7 @@ header#main_menu
 			float left
 			width 25%
 			height 25vw
+			margin 10% 0
 			transform-origin center
 			vendor(filter,blur(0px))
 			-webkit-backface-visibility hidden
@@ -296,7 +296,7 @@ header#main_menu
 		margin-top ($padding * 2)
 	h1
 		text-transform uppercase
-	h1, p, img
+	h1, p, .oembed
 		margin-bottom $padding
 	img
 		width 100%

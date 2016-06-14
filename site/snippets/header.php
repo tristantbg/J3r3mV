@@ -46,7 +46,7 @@
 	<link rel="icon" href="<?= url('assets/images/favicon.ico') ?>" type="image/x-icon">
 
 	<?php 
-	echo css('assets/css/app.min.css');
+	echo css(array('assets/css/app.min.css', 'assets/plugins/oembed/css/oembed.css'));
 	echo js('assets/js/vendor/modernizr.min.js');
 	?>
 	

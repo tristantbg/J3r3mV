@@ -10,11 +10,12 @@ $projects = $pages->find('work')->index()->filterBy('template', 'project')->visi
 
 <?php foreach ($projects as $project) :?>
 
+	<?php $image = $project->featured()->toFile(); ?>
+
 	<div class="project" data-title="<?php echo $project->title()->html() ?>" data-filter="<?php echo tagslug($project->category()) ?>">
 		<a href="<?php echo $project->url() ?>" data-title="<?php echo $project->title()->html() ?>" data-target="<?php echo $project->uri() ?>">
-		<span class="project-img <?php if($project->important() == '1'): echo 'important'; else: echo 'regular'; endif?>">
+		<span class="project-img<?php if($project->important() == '1'): echo ' important'; else: echo ' regular'; endif ?><?php if($image->landscape()): echo ' landscape'; endif ?>">
 		<?php 
-			$image = $project->featured()->toFile();
 			$srcset = '';
 			for ($i = 100; $i <= 900; $i += 200) $srcset .= resizeOnDemand($image, $i) . ' ' . $i . 'w,';
 		?>

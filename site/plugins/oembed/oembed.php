@@ -1,64 +1,108 @@
 <?php
 
-require 'core/oembed.php';
+namespace Kirby\Plugins\distantnative\oEmbed;
 
-/**
- * oEmbed field method: $page->video()->oembed()
- */
-field::$methods['oembed'] = function($field, $args = array()) {
-  $oembed = new OEmbed($field->value);
+require_once('lib/autoload.php');
 
-  // autoplay setting
-  if((isset($args['autoplay']) and $args['autoplay'] == true) or c::get('oembed.autoplay', false)) {
-    $oembed->autoplay = true;
-  }
+$kirby    = kirby();
+$language = $kirby->site()->language();
+$language = $language ? $language->code() : null;
 
-  // custom thumbnail
-  if (isset($args['thumbnail'])) {
-    $oembed->thumb->set($args['thumbnail']);
-  }
+// ================================================
+//  Load components
+// ================================================
 
-  return $oembed->get($args);
-};
+Autoloader::load([
+  'vendor'       => ['Embed/src/autoloader'],
+  'core'         => ['core', 'url', 'html'],
+  'lib'          => ['data', 'cache', 'thumb'],
+  'translations' => ['en', $language],
+  'providers'    => ['provider', true]
+]);
 
 
-/**
- * oEmbed Kirbytext tag: (oembed: https://youtube.com/watch?v=wZZ7oFKsKzY)
- */
-kirbytext::$tags['oembed'] = array(
-  'attr' => array(
-      'class',
-      'thumb',
-      'autoplay',
-      'artwork',
-      'visual',
-      'size',
-      'color',
-      'jsapi',
-  ),
-  'html' => function($tag) {
-    $args = array(
-      'class'   => $tag->attr('class', false),
-      'artwork' => $tag->attr('artwork', c::get('oembed.defaults.artwork', 'true')),
-      'visual'  => $tag->attr('visual', c::get('oembed.defaults.visual', 'true')),
-      'size'    => $tag->attr('size', c::get('oembed.defaults.size', 'default')),
-      'jsapi'   => $tag->attr('jsapi', false)
-    );
+// ================================================
+//  Global helper
+// ================================================
 
-    $oembed = new OEmbed($tag->attr('oembed'));
+function oembed($url, $args = []) {
+  return new Core($url, $args);
+}
 
-    // autoplay setting
-    if($tag->attr('autoplay', c::get('oembed.autoplay', false)) == 'true') {
-      $oembed->autoplay = true;
+
+// ================================================
+//  $page->video()->oembed()
+// ================================================
+
+$kirby->set('field::method', 'oembed', function($field, $args = []) {
+  return oembed($field->value, $args);
+});
+
+
+// ================================================
+//  (oembed: …)
+// ================================================
+
+$options = [
+  'class'     => 'string',
+  'thumb'     => 'string',
+  'autoload'  => 'bool',
+  'lazyvideo' => 'bool',
+  'jsapi'     => 'bool',
+];
+
+$kirby->set('tag', 'oembed', [
+  'attr' => array_keys($options),
+  'html' => function($tag) use($options) {
+    $args = [];
+
+    foreach($options as $option => $mode) {
+      if($mode === 'bool') {
+        if($tag->attr($option) === 'true')  $args[$option] = true;
+        if($tag->attr($option) === 'false') $args[$option] = false;
+      } elseif ($mode === 'string') {
+        $args['option'] = $tag->attr($option);
+      }
     }
 
-    // custom thumbnail
-    if($tag->attr('thumb', false)) {
-      $oembed->thumb->set($tag->file($tag->attr('thumb'))->url());
+    return oembed($tag->attr('oembed'), $args);
+  }
+]);
+
+
+// ================================================
+//  Register panel field
+// ================================================
+
+$kirby->set('field', 'oembed', __DIR__ . DS . 'field');
+$kirby->set('route', [
+  'pattern' => 'api/plugin/oembed/preview',
+  'action'  => function() {
+    $oembed = oembed(get('url'), [
+      'lazyvideo' => true
+    ]);
+
+    $response = [];
+
+    if($oembed->data === false) {
+      $response['success'] = 'false';
+
+    } else {
+      $response['success']      = 'true';
+      $response['title']        = Html::removeEmojis($oembed->title());
+      $response['authorName']   = $oembed->authorName();
+      $response['authorUrl']    = $oembed->authorUrl();
+      $response['providerName'] = $oembed->providerName();
+      $response['providerUrl']  = $oembed->url();
+      $response['type']         = ucfirst($oembed->type());
+      $response['parameters']   = Html::cheatsheet($oembed->providerParameters());
     }
 
-    return $oembed->get($args);
-  }
-);
+    if(get('code') === 'true') {
+      $response['code'] = (string)$oembed;
+    }
 
-
+    return \response::json($response);
+  },
+  'method'  => 'POST'
+]);
