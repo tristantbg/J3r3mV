@@ -1,7 +1,7 @@
 /* globals $:false */
 var width = $(window).width(),
     height = $(window).height(),
-    ySpeed, controller, parallax, $slidecontainer, $body, $intro, $mouse_nav, mobile = false;
+    index = 1, ySpeed, elemW, startPos, rotationStart, rotationEnd, controller, parallax, $slidecontainer, $body, $intro, $mouse_nav, mobile = false;
 $(function() {
     var app = {
         init: function() {
@@ -257,28 +257,41 @@ $(function() {
             }
         },
         placeElem: function(elem, important) {
-            var elemW;
+            if(index%2 == 0) {
+              startPos = rand(0, 50);
+            } else {
+              startPos = rand(50, 100);
+            }
             if (important) {
-                elemW = rand(85, 96);
-                ySpeed = rand(-50,230) + '%';
+                if (elem.getAttribute("data-ratio") > 1) {
+                    elemW = 93;
+                } else {
+                    elemW = rand(85, 93);
+                }
+                rotationStart = rand(-10, 10);
+                rotationEnd = rand(-10,10);
+                ySpeed = (startPos + rand(-30, 30)) + '%';
             } else {
                 elemW = rand(60, 75);
-                ySpeed = rand(-100,120) + '%';
+                rotationStart = rand(-40, 40);
+                rotationEnd = rand(-10, 10);
+                ySpeed = (startPos + rand(-120,0)) + '%';
             }
             var spaceAround = 100 - elemW;
             TweenLite.to(elem, 0, {
                 width: elemW + "%",
-                y: rand(0, 100) + "%",
+                y: startPos + "%",
                 x: rand(0, spaceAround) + "%",
-                rotation: rand(-10, 10)
+                rotation: rotationStart
             });
             new ScrollMagic.Scene({
                 triggerElement: elem,
-                duration: rand(2, 4) * height + "px"
+                duration: rand(1.5, 3) * height + "px"
             }).setTween(elem, {
                 y: ySpeed,
-                rotation: rand(-30, 30)
+                rotation: rotationEnd
             }).addTo(parallax);
+            index++;
         },
         goIndex: function() {
             $projects.removeClass('active');
