@@ -264,15 +264,15 @@ $(function() {
             }
             if (important) {
                 if (elem.getAttribute("data-ratio") > 1) {
-                    elemW = 93;
+                    elemW = 100;
                 } else {
                     elemW = rand(85, 93);
                 }
                 rotationStart = rand(-10, 10);
                 rotationEnd = rand(-10,10);
-                ySpeed = (startPos + rand(-30, 30)) + '%';
+                ySpeed = (startPos + rand(-30, 50)) + '%';
             } else {
-                elemW = rand(60, 75);
+                elemW = rand(60, 70);
                 rotationStart = rand(-40, 40);
                 rotationEnd = rand(-10, 10);
                 ySpeed = (startPos + rand(-120,0)) + '%';

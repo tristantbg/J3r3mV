@@ -218,6 +218,7 @@ header#main_menu
 		pointer-events none
 		flexbox()
 		align-items center
+		z-index 100
 		+below($desktop)
 			display none
 	.wrap
@@ -251,6 +252,8 @@ header#main_menu
 					transform(none)
 		.project:last-child
 			margin 0
+		.project:hover
+			z-index 10
 		.project.hidden
 			a
 				cursor default
@@ -340,6 +343,7 @@ body.page
 		.project
 			+above($tablet)
 				width 50%
+				margin 15% 0
 	.content
 		left 50%
 		+below($tablet)
