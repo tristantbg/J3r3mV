@@ -284,14 +284,16 @@ $(function() {
                 width: elemW + "%",
                 y: startPos + "%",
                 x: rand(0, spaceAround) + "%",
-                rotation: rotationStart
+                rotation: rotationStart,
+                force3D: true
             });
             new ScrollMagic.Scene({
                 triggerElement: elem,
                 duration: rand(1.5, 3) * height + "px"
             }).setTween(elem, {
                 y: ySpeed,
-                rotation: rotationEnd
+                rotation: rotationEnd,
+                force3D: true
             }).addTo(parallax);
             index++;
         },
