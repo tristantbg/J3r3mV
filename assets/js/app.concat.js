@@ -1,7 +1,8 @@
 /* globals $:false */
 var width = $(window).width(),
     height = $(window).height(),
-    index = 1, ySpeed, elemW, startPos, rotationStart, rotationEnd, controller, parallax, $slidecontainer, $body, $intro, $mouse_nav, mobile = false;
+    index = 1,
+    ySpeed, elemW, startPos, rotationStart, rotationEnd, controller, parallax, $slidecontainer, $body, $intro, $mouse_nav, mobile = false;
 $(function() {
     var app = {
         init: function() {
@@ -133,8 +134,9 @@ $(function() {
                             app.goIndex();
                         }
                     });
-                    $('.offset').click(function(event) {
-                        $body.animate({
+                    $('body').on('click', '.offset', function(event) {
+                        event.preventDefault();
+                        $('body,html').animate({
                             scrollTop: height / 2
                         }, 1000);
                     });
@@ -157,23 +159,23 @@ $(function() {
             if (filter == 'all') {
                 $categories.removeClass('active');
                 $projects.removeClass('hidden');
-                TweenMax.to($projects, 0.4, {
-                    webkitFilter: "blur(0px)",
-                    ease: Power1.easeOut,
-                });
+                // TweenMax.to($projects, 0.4, {
+                //     webkitFilter: "blur(0px)",
+                //     ease: Power1.easeOut,
+                // });
             } else {
                 $categories.removeClass('active');
                 element.addClass('active');
-                TweenMax.to($('.project.hidden'), 0.4, {
-                    webkitFilter: "blur(0px)",
-                    ease: Power1.easeOut,
-                });
+                // TweenMax.to($('.project.hidden'), 0.4, {
+                //     webkitFilter: "blur(0px)",
+                //     ease: Power1.easeOut,
+                // });
                 $projects.removeClass('hidden');
                 $targets = $('.project:not([data-filter="' + filter + '"])').addClass('hidden');
-                TweenMax.to($targets, 0.4, {
-                    webkitFilter: "blur(30px)",
-                    ease: Power1.easeOut,
-                });
+                // TweenMax.to($targets, 0.4, {
+                //     webkitFilter: "blur(30px)",
+                //     ease: Power1.easeOut,
+                // });
             }
         },
         sizeSet: function() {
@@ -182,8 +184,8 @@ $(function() {
             if (width >= 900) {
                 s = width / 4;
                 $projects.css({
-                    width: s,
-                    height: s
+                    width: s-4,
+                    height: s-4
                 });
                 if (mobile) {
                     location.reload();
@@ -257,10 +259,10 @@ $(function() {
             }
         },
         placeElem: function(elem, important) {
-            if(index%2 == 0) {
-              startPos = rand(0, 50);
+            if (index % 2 == 0) {
+                startPos = rand(0, 50);
             } else {
-              startPos = rand(50, 100);
+                startPos = rand(50, 100);
             }
             if (important) {
                 if (elem.getAttribute("data-ratio") > 1) {
@@ -269,13 +271,13 @@ $(function() {
                     elemW = rand(85, 93);
                 }
                 rotationStart = rand(-10, 10);
-                rotationEnd = rand(-10,10);
+                rotationEnd = rand(-10, 10);
                 ySpeed = (startPos + rand(-30, 50)) + '%';
             } else {
                 elemW = rand(60, 70);
                 rotationStart = rand(-40, 40);
                 rotationEnd = rand(-10, 10);
-                ySpeed = (startPos + rand(-120,0)) + '%';
+                ySpeed = (startPos + rand(-120, 0)) + '%';
             }
             var spaceAround = 100 - elemW;
             TweenLite.to(elem, 0, {

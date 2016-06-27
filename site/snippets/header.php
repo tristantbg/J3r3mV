@@ -28,7 +28,8 @@
     <meta property="og:url" content="<?php echo html($page->url()) ?>" />
     <?php if($page->content()->name() == "project"): ?>
 		<?php if($page->featured() != null): ?>
-			<meta property="og:image" content="<?= resizeOnDemand($page->featured()->toFile(), 1200) ?>"/>
+			<?php $image = $page->featured()->toFile() ?>
+			<meta property="og:image" content="<?= resizeOnDemand($image, 1200) ?>"/>
 		<?php endif ?>
 	<?php else: ?>
 		<?php if(!$site->ogimage()->empty()): ?>

@@ -205,6 +205,7 @@ header#main_menu
 	//justify-content space-between
 	//flex-wrap wrap
 	min-height 200vh
+	overflow hidden
 	+above($tablet)
 		margin-bottom 50vh
 	.offset
@@ -223,6 +224,7 @@ header#main_menu
 			display none
 	.wrap
 		.project
+			transition(all, 400ms)
 			pointer-events none
 			position relative
 			float left
@@ -255,6 +257,7 @@ header#main_menu
 		.project:hover
 			z-index 10
 		.project.hidden
+			vendor(filter, blur(30px))
 			a
 				cursor default
 		.project.active
@@ -285,13 +288,15 @@ header#main_menu
 			display none
 	.inner
 		padding $padding
-		overflow-y scroll
+		overflow hidden
 		+below($tablet)
 			padding $paddingmobile
 	.page_title
+		transition(left)
+		width 50%
 		position fixed
 		top $padding
-		left 'calc(50% + %s)' % ($padding)
+		left 'calc(100% + %s)' % ($padding)
 		z-index 4000
 		+below($tablet)
 			top $paddingmobile
@@ -308,9 +313,14 @@ header#main_menu
 	img.lazyimg
 		opacity 0.3
 		vendor(filter, blur(5px))
+		margin-bottom $padding
 	img.lazyimg.lazyloaded
 		opacity 1
 		vendor(filter, blur(0px))
+	p > .lazyimg:last-of-type
+		margin-bottom 0
+	p:last-of-type
+		margin-bottom 0
 		
 .content::before
 	transition(left)
@@ -350,6 +360,8 @@ body.page
 			position initial
 			left 0
 			height auto
+		.page_title
+			left 'calc(50% + %s)' % ($padding)
 	.content::before
 		left 50%
 		+below($tablet)
