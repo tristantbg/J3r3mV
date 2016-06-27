@@ -205,8 +205,8 @@ header#main_menu
 	//justify-content space-between
 	//flex-wrap wrap
 	min-height 200vh
-	overflow hidden
 	+above($tablet)
+		overflow hidden
 		padding-bottom 50vh
 	.offset
 		height 100vh
@@ -325,7 +325,7 @@ header#main_menu
 	img.lazyimg.lazyloaded
 		opacity 1
 		vendor(filter, blur(0px))
-	p > .lazyimg:last-of-type
+	p > .lazyimg:last-child
 		margin-bottom 0
 	p:last-of-type
 		margin-bottom 0
@@ -370,6 +370,8 @@ body.page
 			height auto
 		.page_title
 			left 'calc(50% + %s)' % ($padding)
+			+below($tablet)
+				left $paddingmobile
 	.content::before
 		left 50%
 		+below($tablet)
