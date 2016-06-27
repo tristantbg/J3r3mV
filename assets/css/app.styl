@@ -133,7 +133,9 @@ a, a:hover, a:visited, a:focus
 	visibility hidden
 
 img.lazyimg
-	transition()
+	transition(all, 400ms)
+	+below($tablet)
+		transition(all, 200ms)
 
 img.lazyimg
 	opacity 0
