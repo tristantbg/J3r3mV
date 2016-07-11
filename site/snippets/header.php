@@ -14,7 +14,13 @@
     <?php else: ?>
       <title><?php echo $site->title()->html() ?> | <?php echo $page->title()->html() ?></title>
     <?php endif ?>
-	<meta name="description" content="<?php echo $site->description()->html() ?>">
+	<?php if($page->isHomepage()): ?>
+		<meta name="description" content="<?php echo $site->description()->html() ?>">
+	<?php else: ?>
+		<?php if(!$page->description()->empty()): ?>
+			<meta name="description" content="<?php echo $page->description()->excerpt(250) ?>">
+		<?php endif ?>
+	<?php endif ?>
 	<meta name="robots" content="index,follow" />
 	<meta name="keywords" content="<?php echo $site->keywords()->html() ?>">
 	<meta name="DC.Title" content="<?php echo $page->title()->html() ?>" />
