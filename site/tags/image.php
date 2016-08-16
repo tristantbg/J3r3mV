@@ -95,7 +95,7 @@ kirbytext::$tags['image'] = array(
     };
 
       $class = trim($tag->attr('class') . ' ' . $tag->attr('imgclass'));
-      return $_link($_image($class)).'<noscript><img src="'.resizeOnDemand($file, 900).'" alt="'.$alt.'" width="100%" height="auto"></noscript>';
+      return $_link($_image($class)).'<noscript><img src="'.resizeOnDemand($file, 900).'" alt="'.$alt.'" width="100%" height="auto" /></noscript>';
 
   }
 );
