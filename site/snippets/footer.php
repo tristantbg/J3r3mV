@@ -14,6 +14,11 @@
   </script>
 <?php endif ?>
 
+	<script>
+		window.lazySizesConfig = window.lazySizesConfig || {};
+		lazySizesConfig.init = false;
+	</script>
+
 	<?php
 	echo js(array('assets/js/build/plugins.js', 'assets/js/build/app.min.js'));
 	?>

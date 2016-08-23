@@ -6,10 +6,6 @@ var width = $(window).width(),
 $(function() {
     var app = {
         init: function() {
-            $(window).load(function() {
-                app.deferImages();
-                $(".loader").fadeOut(300);
-            });
             $(window).resize(function(event) {
                 app.sizeSet();
             });
@@ -141,6 +137,10 @@ $(function() {
                         }, 1000);
                     });
                 }
+                $(window).load(function() {
+                    lazySizes.init();
+                    $(".loader").fadeOut(300);
+                });
             });
         },
         getParameters: function(val) {
@@ -184,8 +184,8 @@ $(function() {
             if (width >= 900) {
                 s = width / 4;
                 $projects.css({
-                    width: s-4,
-                    height: s-4
+                    width: s - 4,
+                    height: s - 4
                 });
                 if (mobile) {
                     location.reload();

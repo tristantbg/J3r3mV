@@ -21,11 +21,11 @@ $projects = $pages->find('work')->index()->filterBy('template', 'project')->visi
 		?>
 
 		<img 
-		  src="<?php echo resizeOnDemand($image, 500) ?>" 
 		  srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+		  data-src="<?php echo resizeOnDemand($image, 800) ?>" 
 		  data-srcset="<?php echo $srcset ?>" 
 		  data-sizes="auto" 
-		  data-optimumx="1" 
+		  data-optimumx="1.3" 
 		  class="lazyimg lazyload"
 		  alt="<?php echo $project->title()->html().' — © '.$project->date("Y").', '.$site->title(); ?>" 
 		  width="100%" height="auto">
