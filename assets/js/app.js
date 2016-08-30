@@ -1,6 +1,7 @@
 /* globals $:false */
 var width = $(window).width(),
     height = $(window).height(),
+    tablet = 1025,
     index = 1,
     ySpeed, elemW, startPos, rotationStart, rotationEnd, controller, parallax, $slidecontainer, $body, $intro, $mouse_nav, mobile = false;
 $(function() {
@@ -48,7 +49,7 @@ $(function() {
                     }
                 });
                 $('body').on('click', '[data-target]', function(e) {
-                    if (width >= 900) {
+                    if (width >= tablet) {
                         $el = $(this);
                         $parent = $el.parent();
                         e.preventDefault();
@@ -76,7 +77,7 @@ $(function() {
                     }
                 });
                 $('.category[data-filter]').bind('click', function(e) {
-                    if (width >= 900) {
+                    if (width >= tablet) {
                         $el = $(this);
                         var url = window.location.href.split(/[?#]/)[0];
                         var filter = $el.data('filter');
@@ -88,13 +89,13 @@ $(function() {
                     }
                 });
                 $('body').on('click', '.back-btn, .overlay', function(e) {
-                    if (width >= 900) {
+                    if (width >= tablet) {
                         e.preventDefault();
                         app.goIndex();
                     }
                 });
                 $('.project [data-target]').hover(function() {
-                    if (width >= 900) {
+                    if (width >= tablet) {
                         if (!$(this).parent('.project').hasClass('hidden')) {
                             $mouse_nav.html($(this).data('title'));
                         }
@@ -121,7 +122,7 @@ $(function() {
                 // $(document).keyup(function(e) {
                 //     if (e.keyCode === 39 && $slider) app.goNext($slider);
                 // });
-                if (width >= 900) {
+                if (width >= tablet) {
                     $(document).scrollScope();
                     app.scrollEffect();
                     app.mouseNav();
@@ -181,7 +182,7 @@ $(function() {
         sizeSet: function() {
             width = $(window).width();
             height = $(window).height();
-            if (width >= 900) {
+            if (width >= tablet) {
                 s = width / 4;
                 $projects.css({
                     width: s - 4,
