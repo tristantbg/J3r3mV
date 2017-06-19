@@ -1,5 +1,5 @@
 <?php 
-$projects = $pages->find('work')->index()->filterBy('template', 'project')->visible();
+$projects = page('work')->children()->visible();
 ?>
 
 <div class="projects">
@@ -10,7 +10,13 @@ $projects = $pages->find('work')->index()->filterBy('template', 'project')->visi
 
 <?php foreach ($projects as $project) :?>
 
-	<?php $image = $project->featured()->toFile(); ?>
+	<?php $image = $project->featured(); ?>
+
+	<?php if($image->isNotEmpty()): ?>
+
+	<?php if($project->intendedTemplate() == 'clone'){ $project = page($project->project()->value()); } ?>
+
+	<?php $image = $image->toFile(); ?>
 
 	<div class="project" data-title="<?php echo $project->title()->html() ?>" data-filter="<?php echo tagslug($project->category()) ?>">
 		<a href="<?php echo $project->url() ?>" data-title="<?php echo $project->title()->html() ?>" data-target="<?php echo $project->uri() ?>">
@@ -33,6 +39,8 @@ $projects = $pages->find('work')->index()->filterBy('template', 'project')->visi
 		</span>
 		</a>
 	</div>
+
+	<?php endif ?>
 
 <?php endforeach ?>
 

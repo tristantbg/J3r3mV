@@ -30,6 +30,7 @@ of the system, please check out http://getkirby.com/docs/advanced/options
 
 */
 
+c::set('debug', true);
 c::set('oembed.lazyvideo', true);
 c::set('autopublish.templates', array('project', 'item'));
 c::set('thumb.quality', 100);
@@ -45,7 +46,7 @@ c::set('routes', array(
     ),
     array(
         'pattern' => 'work',
-        'action'  => function($uri,$uid) {
+        'action'  => function() {
           $page = site()->homePage();
       		go($page);
         }

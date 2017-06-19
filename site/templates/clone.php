@@ -1,0 +1,1 @@
+<?php go($pages->find($page->project()->value())) ?>
