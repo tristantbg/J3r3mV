@@ -52,3 +52,8 @@ c::set('routes', array(
         }
     )
 ));
+kirby()->hook(['panel.page.create', 'panel.page.sort', 'panel.page.hide', 'panel.page.delete'], function($page) {
+	$page->parent()->update(array(
+		'sortable'    => ''
+	));
+});

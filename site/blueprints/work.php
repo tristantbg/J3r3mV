@@ -3,6 +3,7 @@
 title: Work
 files: false
 pages:
+  sort: false
   template:
     - project
     - clone

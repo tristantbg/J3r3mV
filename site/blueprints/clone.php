@@ -3,6 +3,7 @@
 title: Clone
 files: true
 pages: false
+icon: files-o
 fields:
   title:
     label: Title
@@ -18,7 +19,7 @@ fields:
       page: ../
       fetch: children
       value: '{{uri}}'
-      text: '{{title}}'
+      text: '{{title}} ({{uri}})'
   featured:
     label: Featured image
     type:  image

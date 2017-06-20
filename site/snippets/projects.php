@@ -14,13 +14,15 @@ $projects = page('work')->children()->visible();
 
 	<?php if($image->isNotEmpty()): ?>
 
+	<?php $important = $project->important()->bool() ?>
+
 	<?php if($project->intendedTemplate() == 'clone'){ $project = page($project->project()->value()); } ?>
 
 	<?php $image = $image->toFile(); ?>
 
 	<div class="project" data-title="<?php echo $project->title()->html() ?>" data-filter="<?php echo tagslug($project->category()) ?>">
 		<a href="<?php echo $project->url() ?>" data-title="<?php echo $project->title()->html() ?>" data-target="<?php echo $project->uri() ?>">
-		<span class="project-img<?php if($project->important() == '1'): echo ' important'; else: echo ' regular'; endif ?>" data-ratio="<?php echo $image->ratio() ?>">
+		<span class="project-img<?php if($important): echo ' important'; else: echo ' regular'; endif ?>" data-ratio="<?php echo $image->ratio() ?>">
 		<?php 
 			$srcset = '';
 			for ($i = 100; $i <= 900; $i += 200) $srcset .= resizeOnDemand($image, $i) . ' ' . $i . 'w,';
