@@ -187,19 +187,19 @@ header#main_menu
 	margin-top -1em
 	pointer-events none
 	z-index 1000
-	font-family 'AG'
-	text-transform none
+	// font-family 'AG'
+	// text-transform none
 	-webkit-backface-visibility hidden
 	backface-visibility hidden
 	+below($tablet)
 		position absolute
 	h1
 		transition(font-size)
-		font-size 7vw
+		// font-size 7vw
 		z-index 8000
 		cursor pointer
-		+below($tablet)
-			font-size 14vw
+		// +below($tablet)
+		// 	font-size 14vw
 
 .projects
 	transition(width)
@@ -244,6 +244,16 @@ header#main_menu
 				padding $paddingmobile
 			+below($mobile)
 				width 100%
+			+between($mobile, $tablet)
+				&:nth-child(n)
+					img
+						margin-top 30vw
+				&:nth-child(2n)
+					img
+						margin-top 0
+				&:nth-child(3n)
+					img
+						margin-top 15vw
 			a
 				pointer-events auto
 			.project-img
