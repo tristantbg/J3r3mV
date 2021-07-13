@@ -32,8 +32,8 @@ body
 	font-family $font
 	text-rendering optimizeLegibility
 	font-smoothing()
-	font-size 14px
-	line-height 1.1em
+	font-size 12px
+	line-height 1.3em
 	font-weight 400
 	text-transform uppercase
 	+below($tablet)
@@ -44,7 +44,7 @@ p
 
 ::selection
 	background $secondary
-	
+
 ::-moz-selection
 	background $secondary
 
@@ -71,22 +71,22 @@ a, a:hover, a:visited, a:focus
 
 .columns
 	span(1)
-	
+
 .column
 	col(1)
-	
+
 .columns-1 .column
 	col(1)
-	
+
 .columns-2 .column
 	col(1/2, cycle:2)
-	
+
 .columns-3 .column
 	col(1/3, cycle:3)
-	
+
 .columns-4 .column
 	col(1/4, cycle:4)
-	
+
 .columns-5 .column
 	col(1/5, cycle:5)
 
@@ -211,6 +211,10 @@ header#main_menu
 	+above($tablet)
 		overflow hidden
 		padding-bottom 50vh
+	.pointer-none
+		pointer-events none
+		*
+			pointer-events none
 	.offset
 		height 100vh
 		width 100%
@@ -348,7 +352,7 @@ header#main_menu
 		margin-bottom 0
 	ul.columns
 		margin-bottom $padding
-		
+
 .content::before
 	transition(left)
 	content ''
@@ -417,7 +421,7 @@ body.page
 		margin-left 1em
 	.copyright
 		font-size .5rem
-		line-height 1.1em
+		line-height 1.3em
 		p
 			margin-bottom 0
 

@@ -65,7 +65,7 @@ $(function() {
                         }
                         if (!$parent.hasClass('hidden')) {
                             $projects.removeClass('active');
-                            if ($parent.is('.project')) {
+                            if ($parent.is('.project') && !$parent.hasClass('pointer-none')) {
                                 $parent.addClass('active');
                             }
                             History.pushState({

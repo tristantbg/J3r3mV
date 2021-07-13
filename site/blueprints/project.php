@@ -26,11 +26,15 @@ fields:
     label: Important
     type: checkbox
     width: 1/4
+  notClickable:
+    label: Not clickable
+    type: checkbox
+    width: 1/4
   category:
     label: Category
     type:  select
     options: field
-    width: 1/2
+    width: 1/4
     field:
       page:  ../
       name: categories
